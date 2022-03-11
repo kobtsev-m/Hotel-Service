@@ -1,0 +1,7 @@
+{
+  "watch": [
+    "index.ts",
+    "app"
+  ],
+  "ext": "ts,json"
+}

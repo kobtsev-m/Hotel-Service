@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-hotelservice-dev-42030-authRole",
+      "UnauthRoleArn": "arn:aws:iam::564978289903:role/amplify-hotelservice-dev-42030-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::564978289903:role/amplify-hotelservice-dev-42030-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-hotelservice-dev-42030-deployment",
+      "UnauthRoleName": "amplify-hotelservice-dev-42030-unauthRole",
+      "StackName": "amplify-hotelservice-dev-42030",
+      "StackId": "arn:aws:cloudformation:us-west-2:564978289903:stack/amplify-hotelservice-dev-42030/ee9dc8a0-a0b7-11ec-8718-068a0323b6bb",
+      "AmplifyAppId": "d2r22zetbbtg70"
+    },
+    "categories": {
+      "function": {
+        "api": {
+          "deploymentBucketName": "amplify-hotelservice-dev-42030-deployment",
+          "s3Key": "amplify-builds/api-477a4931465067383247-build.zip"
+        }
+      }
+    }
+  }
+}
