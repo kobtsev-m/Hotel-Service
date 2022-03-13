@@ -1,0 +1,27 @@
+version: 1
+backend:
+  phases:
+    preBuild:
+      commands:
+        - cd amplify/backend/function/api/src
+        - yarn install
+    build:
+      commands:
+        - yarn build
+        - cd ../../../../../
+        - amplifyPush --simple
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - yarn install
+    build:
+      commands:
+        - yarn build
+  artifacts:
+    baseDirectory: build
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*

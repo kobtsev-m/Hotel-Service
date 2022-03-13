@@ -1,21 +1,24 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-hotelservice-dev-42030-authRole",
-      "UnauthRoleArn": "arn:aws:iam::564978289903:role/amplify-hotelservice-dev-42030-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::564978289903:role/amplify-hotelservice-dev-42030-authRole",
+      "AuthRoleName": "amplify-hotelservice-dev-20131-authRole",
+      "UnauthRoleArn": "arn:aws:iam::564978289903:role/amplify-hotelservice-dev-20131-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::564978289903:role/amplify-hotelservice-dev-20131-authRole",
       "Region": "us-west-2",
-      "DeploymentBucketName": "amplify-hotelservice-dev-42030-deployment",
-      "UnauthRoleName": "amplify-hotelservice-dev-42030-unauthRole",
-      "StackName": "amplify-hotelservice-dev-42030",
-      "StackId": "arn:aws:cloudformation:us-west-2:564978289903:stack/amplify-hotelservice-dev-42030/ee9dc8a0-a0b7-11ec-8718-068a0323b6bb",
-      "AmplifyAppId": "d2r22zetbbtg70"
+      "DeploymentBucketName": "amplify-hotelservice-dev-20131-deployment",
+      "UnauthRoleName": "amplify-hotelservice-dev-20131-unauthRole",
+      "StackName": "amplify-hotelservice-dev-20131",
+      "StackId": "arn:aws:cloudformation:us-west-2:564978289903:stack/amplify-hotelservice-dev-20131/03b4c9b0-a300-11ec-a109-0a1e6e9a0ad1",
+      "AmplifyAppId": "d76f4ii8xekq8"
     },
     "categories": {
+      "auth": {
+        "undefined": {}
+      },
       "function": {
         "api": {
-          "deploymentBucketName": "amplify-hotelservice-dev-42030-deployment",
-          "s3Key": "amplify-builds/api-477a4931465067383247-build.zip"
+          "deploymentBucketName": "amplify-hotelservice-dev-20131-deployment",
+          "s3Key": "amplify-builds/api-4433694872483376574b-build.zip"
         }
       }
     }
