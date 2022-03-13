@@ -9,7 +9,8 @@
       "UnauthRoleName": "amplify-hotelservice-dev-20131-unauthRole",
       "StackName": "amplify-hotelservice-dev-20131",
       "StackId": "arn:aws:cloudformation:us-west-2:564978289903:stack/amplify-hotelservice-dev-20131/03b4c9b0-a300-11ec-a109-0a1e6e9a0ad1",
-      "AmplifyAppId": "d76f4ii8xekq8"
+      "AmplifyAppId": "d76f4ii8xekq8",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-hotelservice-dev-20131-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {
