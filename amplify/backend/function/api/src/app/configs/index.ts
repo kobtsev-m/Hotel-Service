@@ -5,8 +5,7 @@ const configs = {
     port: process.env.SERVER_PORT ?? 8000
   },
   aws: {
-    cognitoJwks: process.env.AWS_COGNITO_JWKS,
-    userPoolId: process.env.AWS_USER_POOL_ID
+    cognitoJwks: process.env.COGNITO_JWKS
   }
 };
 
