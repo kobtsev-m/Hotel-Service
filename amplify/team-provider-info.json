@@ -14,12 +14,17 @@
     },
     "categories": {
       "auth": {
-        "undefined": {}
+        "undefined": {},
+        "hotelservice": {}
       },
       "function": {
         "api": {
           "deploymentBucketName": "amplify-hotelservice-dev-20131-deployment",
-          "s3Key": "amplify-builds/api-4433694872483376574b-build.zip"
+          "s3Key": "amplify-builds/api-36595045576d3573756f-build.zip"
+        },
+        "confirmSignUp": {
+          "deploymentBucketName": "amplify-hotelservice-dev-20131-deployment",
+          "s3Key": "amplify-builds/confirmSignUp-71716e44772b784d506f-build.zip"
         }
       }
     }

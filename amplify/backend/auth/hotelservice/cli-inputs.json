@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "hotelservice_identitypool_21f79fb1",
-    "allowUnauthenticatedIdentities": true,
+    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "hotels21f79fb1",
     "userPoolName": "hotelservice_userpool_21f79fb1",
     "autoVerifiedAttributes": [
@@ -37,6 +37,24 @@
     "resourceName": "hotelservice",
     "sharedId": "21f79fb1",
     "serviceName": "Cognito",
-    "useDefault": "manual"
+    "useDefault": "default",
+    "authRoleArn": {
+      "Fn::GetAtt": [
+        "AuthRole",
+        "Arn"
+      ]
+    },
+    "unauthRoleArn": {
+      "Fn::GetAtt": [
+        "UnauthRole",
+        "Arn"
+      ]
+    },
+    "breakCircularDependency": true,
+    "useEnabledMfas": true,
+    "dependsOn": [],
+    "hostedUI": false,
+    "userPoolGroupList": [],
+    "authProviders": []
   }
 }

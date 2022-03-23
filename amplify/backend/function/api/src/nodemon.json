@@ -1,6 +1,7 @@
 {
   "watch": [
     "index.ts",
+    "ormconfig.ts",
     ".env",
     "app"
   ],

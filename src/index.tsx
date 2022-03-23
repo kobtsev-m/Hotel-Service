@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
-import { Home } from './pages/home';
+import './styles/index.css';
+import { LoginPage } from './pages/login/login-page';
+import Amplify from 'aws-amplify';
+import awsExports from './aws-exports';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Home />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+Amplify.configure(awsExports);
+
+ReactDOM.render(<LoginPage />, document.getElementById('root'));
 
 reportWebVitals();

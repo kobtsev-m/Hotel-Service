@@ -5,10 +5,11 @@ backend:
       commands:
         - cd amplify/backend/function/api/src
         - yarn install
+        - yarn typeorm migration:run
+        - yarn compile
+        - cd ../../../../../
     build:
       commands:
-        - yarn build
-        - cd ../../../../../
         - amplifyPush --simple
 frontend:
   phases:

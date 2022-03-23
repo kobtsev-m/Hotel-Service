@@ -1,7 +1,6 @@
-import { HomeController } from './home';
+import { Express } from 'express';
+import { userController } from './user';
 
-const controllers = {
-  home: new HomeController()
+export const initControllers = (app: Express) => {
+  userController(app);
 };
-
-export default controllers;
