@@ -43,10 +43,10 @@ class Provider {
     );
   }
 
-  updateHeaders(newHeaders: Record<string, string>) {
-    Object.keys(newHeaders).forEach((key) => {
-      if (newHeaders[key]) {
-        this.params.headers[key] = newHeaders[key];
+  updateHeaders(headers: RequestParams['headers']) {
+    Object.keys(headers).forEach((key) => {
+      if (headers[key]) {
+        this.params.headers[key] = headers[key];
       } else {
         delete this.params.headers[key];
       }

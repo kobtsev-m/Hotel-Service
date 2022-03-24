@@ -7,10 +7,9 @@ import { connectToDb } from './db';
 import { initControllers } from './contollers';
 
 const app = express();
-app.use(cors({ allowedHeaders: ['*'] }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(awsServerlessExpressMiddleware.eventContext());
+app.use(cors({ allowedHeaders: ['*'] }));
 
 initControllers(app);
 connectToDb();

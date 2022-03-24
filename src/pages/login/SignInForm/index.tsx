@@ -1,8 +1,9 @@
 import React from 'react';
 import { Field, Form, Formik } from 'formik';
 import { FormikStatus } from '../../../types/utils/forms';
-import { Alert, Button, FormGroup, Input, Spinner } from 'reactstrap';
+import { Alert, FormGroup, Input } from 'reactstrap';
 import { signIn, SignInParams } from '../../../utils/aws/auth';
+import { ProgressButton } from '../../../components/Buttons/ProgressButton';
 
 interface Props {
   callback?: (...args: any[]) => void;
@@ -41,14 +42,11 @@ export const SignInForm: React.FC<Props> = ({ callback }) => {
             <Alert color='danger'>Incorrect email or password</Alert>
           )}
           <div className='d-flex justify-content-end'>
-            <Button
-              type='submit'
-              color='primary'
-              disabled={status === FormikStatus.Loading}
-              style={{ width: '8rem' }}
-            >
-              {status === FormikStatus.Loading ? <Spinner size='sm' /> : 'Submit'}
-            </Button>
+            <ProgressButton
+              text='Submit'
+              isSubmit={true}
+              isLoading={status === FormikStatus.Loading}
+            />
           </div>
         </Form>
       )}

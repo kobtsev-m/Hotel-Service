@@ -1,0 +1,164 @@
+// BOOTSTRAP 4 VARIABLES
+
+@import "template/components/bootstrap4/functions";
+@import "template/components/bootstrap4/variables";
+@import "template/components/bootstrap4/mixins";
+
+// ArchitectUI Themes Variables
+
+@import "template/themes/layout-variables";
+
+// BOOTSTRAP 4 IMPORTS
+
+@import "template/components/bootstrap4/root";
+@import "template/components/bootstrap4/reboot";
+@import "template/components/bootstrap4/type";
+@import "template/components/bootstrap4/images";
+@import "template/components/bootstrap4/code";
+@import "template/components/bootstrap4/grid";
+@import "template/components/bootstrap4/tables";
+@import "template/components/bootstrap4/forms";
+@import "template/components/bootstrap4/buttons";
+@import "template/components/bootstrap4/transitions";
+@import "template/components/bootstrap4/dropdown";
+@import "template/components/bootstrap4/button-group";
+@import "template/components/bootstrap4/input-group";
+@import "template/components/bootstrap4/custom-forms";
+@import "template/components/bootstrap4/nav";
+@import "template/components/bootstrap4/navbar";
+@import "template/components/bootstrap4/card";
+@import "template/components/bootstrap4/breadcrumb";
+@import "template/components/bootstrap4/pagination";
+@import "template/components/bootstrap4/badge";
+@import "template/components/bootstrap4/jumbotron";
+@import "template/components/bootstrap4/alert";
+@import "template/components/bootstrap4/progress";
+@import "template/components/bootstrap4/media";
+@import "template/components/bootstrap4/list-group";
+@import "template/components/bootstrap4/close";
+@import "template/components/bootstrap4/toasts";
+@import "template/components/bootstrap4/modal";
+@import "template/components/bootstrap4/tooltip";
+@import "template/components/bootstrap4/popover";
+@import "template/components/bootstrap4/carousel";
+@import "template/components/bootstrap4/spinners";
+@import "template/components/bootstrap4/utilities";
+@import "template/components/bootstrap4/print";
+
+// LAYOUT
+@import "template/layout/layout";
+@import "override/layout/layout";
+
+// UTILS
+
+@import "template/utils/helpers";
+@import "template/utils/backgrounds";
+@import "template/utils/comps-animations";
+
+// ELEMENTS
+
+@import "template/elements/buttons";
+@import "template/elements/dropdown";
+@import "template/elements/navs";
+@import "template/elements/badges";
+@import "template/elements/cards";
+@import "template/elements/tabs";
+@import "template/elements/accordions";
+@import "template/elements/progressbar";
+@import "template/elements/timeline";
+@import "template/elements/listgroup";
+@import "template/elements/forms";
+@import "template/elements/pagination";
+@import "template/elements/chat";
+@import "template/elements/forms-wizard";
+
+// DASHBOARD BOXES
+
+@import "template/widgets/chart-boxes/chart-boxes";
+@import "template/widgets/content-boxes/content-boxes";
+@import "template/widgets/profile-boxes/profile-boxes";
+
+// PAGES
+
+@import "template/pages/userpages";
+
+// Applications
+
+@import "template/applications/applications-base";
+
+// COMPONENTS
+
+// Perfect Scrollbar
+@import "template/components/perfect-scrollbar/perfect-scrollbar";
+
+// RC Tabs
+@import "template/components/rc-tabs/rc-tabs";
+
+// Loading Buttons
+@import "template/components/loading-buttons/loading-buttons";
+
+// Hamburger Button
+@import "template/components/hamburgers/hamburgers";
+
+// Drawer
+@import "template/components/drawer/drawer";
+
+// Notifications
+@import "template/components/notifications/sweetalerts";
+@import "template/components/notifications/toastify";
+
+// Modals
+@import "template/components/modals/rodal";
+
+// Progress Bar
+@import "template/components/progress-bar/progress-bar";
+
+// Slick Carousel
+@import "template/components/slick-carousel/slick/slick";
+
+// Block loading
+@import "template/components/block-loading/block-loading";
+
+// Popovers & Tooltips
+@import "template/components/popovers-tooltips/popovers-tooltips";
+
+// Sticky Elements
+@import "template/components/sticky-elements/sticky-elements";
+
+// Calendar
+@import "template/components/calendar/calendar";
+
+// Splitters
+@import "template/components/splitters/splitters";
+
+// Tree View
+@import "template/components/tree-view/tree-view";
+
+// Tables
+@import "override/components/tables/tables";
+
+// Icons
+@import "template/components/icons/linearicons";
+@import "template/components/icons/p7icons";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+
+// FORMS
+@import "template/components/forms/datepicker/datepicker";
+@import "template/components/forms/multiselect/multiselect";
+@import "template/components/forms/wysiwyg/wysiwyg";
+@import "template/components/forms/toggle-switch/switch";
+@import "template/components/forms/dropzone/dropzone";
+@import "template/components/forms/typeahead/typeahead";
+
+// REACT WIDGETS
+@import "~react-widgets/styles.css";
+
+// DEMO
+
+@import "template/demo-ui/demo";
+
+// Responsive
+
+@import "template/layout/responsive/responsive-base";
