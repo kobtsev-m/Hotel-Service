@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import {
   Button,
   Col,
@@ -27,7 +27,7 @@ export const MegaMenu = () => {
       <Nav className='header-megamenu'>
         <NavItem>
           <NavLink href='#' onClick={toggle} id='PopoverMegaMenu'>
-            <i className='nav-link-icon pe-7s-gift'> </i>
+            <i className='nav-link-icon pe-7s-menu'> </i>
             Menu
             <FontAwesomeIcon className='ml-2 opacity-5' icon={faAngleDown} />
           </NavLink>
@@ -43,71 +43,75 @@ export const MegaMenu = () => {
           toggle={toggle}
         >
           <div className='dropdown-mega-menu'>
-            <div className='grid-menu grid-menu-3col'>
+            <div className='grid-menu'>
               <Row className='no-gutters'>
-                <Col xl='4' sm='6'>
+                <Col md='6'>
                   <Nav vertical>
-                    <NavItem className='nav-item-header'>Overview</NavItem>
+                    <NavItem className='nav-item-header'>Hotels</NavItem>
                     <NavItem>
                       <NavLink href='#'>
-                        <span>Contacts</span>
+                        <span>Horizon Patio</span>
+                        <div className='ml-auto badge badge-success'>
+                          5 <i className='pe-7s-star ml-1'> </i>
+                        </div>
                       </NavLink>
                     </NavItem>
                     <NavItem>
                       <NavLink href='#'>
-                        <span>Incidents</span>
-                        <div className='ml-auto badge badge-pill badge-danger'>5</div>
+                        <span>Metropolis</span>
+                        <div className='ml-auto badge badge-success'>
+                          5 <i className='pe-7s-star ml-1'> </i>
+                        </div>
                       </NavLink>
                     </NavItem>
                     <NavItem>
                       <NavLink href='#'>
-                        <span>Companies</span>
+                        <span>Sunset Lodge</span>
+                        <div className='ml-auto badge badge-warning'>
+                          4 <i className='pe-7s-star ml-1'> </i>
+                        </div>
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink disabled href='#'>
-                        <span>Dashboards</span>
+                      <NavLink href='#'>
+                        <span>Crowne Plaza</span>
+                        <div className='ml-auto badge badge-primary'>
+                          3 <i className='pe-7s-star ml-1'> </i>
+                        </div>
                       </NavLink>
                     </NavItem>
                   </Nav>
                 </Col>
-                <Col xl='4' sm='6'>
+                <Col md='6'>
                   <Nav vertical>
-                    <NavItem className='nav-item-header'>Favourites</NavItem>
-                    <NavItem>
-                      <NavLink href='#'>Reports Conversions</NavLink>
-                    </NavItem>
+                    <NavItem className='nav-item-header'>Services</NavItem>
                     <NavItem>
                       <NavLink href='#'>
-                        Quick Start
-                        <div className='ml-auto badge badge-success'>New</div>
+                        Spa
+                        <div className='ml-auto badge badge-pill badge-danger'>
+                          <small>Popular</small>
+                        </div>
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href='#'>Users &amp; Groups</NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink href='#'>Proprieties</NavLink>
-                    </NavItem>
-                  </Nav>
-                </Col>
-                <Col xl='4' sm='6'>
-                  <Nav vertical>
-                    <NavItem className='nav-item-header'>Sales &amp; Marketing</NavItem>
-                    <NavItem>
-                      <NavLink href='#'>Queues</NavLink>
-                    </NavItem>
-                    <NavItem>
-                      <NavLink href='#'>Resource Groups</NavLink>
+                      <NavLink href='#'>Gym</NavLink>
                     </NavItem>
                     <NavItem>
                       <NavLink href='#'>
-                        Goal Metrics
-                        <div className='ml-auto badge badge-warning'>3</div>
+                        Aquapark
+                        <div className='ml-auto badge badge-pill badge-danger'>
+                          <small>Popular</small>
+                        </div>
                       </NavLink>
                     </NavItem>
                     <NavItem>
-                      <NavLink href='#'>Campaigns</NavLink>
+                      <NavLink href='#'>Bar</NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink href='#'>Surfing</NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink href='#'>Riding</NavLink>
                     </NavItem>
                   </Nav>
                 </Col>
@@ -123,33 +127,37 @@ export const MegaMenu = () => {
           </DropdownToggle>
           <DropdownMenu className='rm-pointers mt-3'>
             <div className='dropdown-menu-header'>
-              <div className='dropdown-menu-header-inner bg-secondary'>
+              <div className='dropdown-menu-header-inner bg-danger'>
                 <div className='menu-header-image opacity-5' />
                 <div className='menu-header-content'>
-                  <h5 className='menu-header-title'>Overview</h5>
-                  <h6 className='menu-header-subtitle'>Dropdown menus for everyone</h6>
+                  <h5 className='menu-header-title'>Popular</h5>
+                  <h6 className='menu-header-subtitle'>Description provided</h6>
                 </div>
               </div>
             </div>
-            <div className='scroll-area-xs' style={{ height: '150px' }}>
+            <div className='scroll-area-xs' style={{ height: '230px' }}>
               <PerfectScrollbar>
-                <DropdownItem header>Key Figures</DropdownItem>
-                <DropdownItem>Service Calendar</DropdownItem>
-                <DropdownItem>Knowledge Base</DropdownItem>
-                <DropdownItem>Accounts</DropdownItem>
+                <DropdownItem header>Services</DropdownItem>
+                <DropdownItem>
+                  <div className='mr-4'>Spa</div>
+                  <div className='ml-auto badge badge-primary'>101</div>
+                </DropdownItem>
+                <DropdownItem>
+                  <div className='mr-4'>Aquapark</div>
+                  <div className='ml-auto badge badge-primary'>23</div>
+                </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem>Products</DropdownItem>
-                <DropdownItem>Rollup Queries</DropdownItem>
+                <DropdownItem header>Apartments</DropdownItem>
+                <DropdownItem>
+                  <div className='mr-4'>President Lux - Hotel Patio</div>
+                  <div className='ml-auto badge badge-primary'>56</div>
+                </DropdownItem>
+                <DropdownItem>
+                  <div className='mr-4'>Loft - Sunset Lodge</div>
+                  <div className='ml-auto badge badge-primary'>10</div>
+                </DropdownItem>
               </PerfectScrollbar>
             </div>
-            <Nav vertical>
-              <NavItem className='nav-item-divider' />
-              <NavItem className='nav-item-btn'>
-                <Button size='sm' className='btn-wide btn-shadow' color='danger'>
-                  Cancel
-                </Button>
-              </NavItem>
-            </Nav>
           </DropdownMenu>
         </UncontrolledButtonDropdown>
         <UncontrolledDropdown nav inNavbar>
@@ -162,26 +170,21 @@ export const MegaMenu = () => {
             <div className='dropdown-menu-header'>
               <div className='dropdown-menu-header-inner bg-success'>
                 <div className='menu-header-image opacity-1' />
-                <div className='menu-header-content text-left'>
-                  <h5 className='menu-header-title'>Overview</h5>
-                  <h6 className='menu-header-subtitle'>Unlimited options</h6>
+                <div className='menu-header-content text-left px-3'>
+                  <h5 className='menu-header-title'>Current rent</h5>
+                  <h6 className='menu-header-subtitle'>Description provided</h6>
                   <div className='menu-header-btn-pane'>
-                    <Button size='sm' color='dark' className='mr-2'>
-                      Settings
+                    <Button size='sm' color='light' className='w-100 mt-2'>
+                      Check-in date: 12:00, 25.03.2022
                     </Button>
-                    <Button size='sm' className='btn-icon btn-icon-only' color='warning'>
-                      <i className='pe-7s-config btn-icon-wrapper'> </i>
+                    <Button size='sm' color='dark' className='w-100 mt-2'>
+                      Check-out date: 16:00, 28.03.2022
                     </Button>
                   </div>
                 </div>
               </div>
             </div>
-            <DropdownItem>Graphic Design</DropdownItem>
-            <DropdownItem>App Development</DropdownItem>
-            <DropdownItem>Icon Design</DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem>Miscellaneous</DropdownItem>
-            <DropdownItem>Frontend Dev</DropdownItem>
+            <DropdownItem>President Lux - Hotel Patio</DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
       </Nav>

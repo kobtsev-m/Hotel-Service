@@ -1,18 +1,20 @@
+import Amplify from 'aws-amplify';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import reportWebVitals from './reportWebVitals';
-import Amplify from 'aws-amplify';
 import awsExports from './aws-exports';
+import reportWebVitals from './reportWebVitals';
+import { ToastContainer } from 'react-toastify';
+import { RouterProvider } from './router';
+import { RootStore, StoreProvider } from './store';
 import './assets/index.scss';
-import { Layout } from './components/Layout';
-import { LoginPage } from './pages/login/login-page';
 
 Amplify.configure(awsExports);
 
 ReactDOM.render(
-  <Layout>
-    <LoginPage />
-  </Layout>,
+  <StoreProvider store={new RootStore()}>
+    <RouterProvider />
+    <ToastContainer />
+  </StoreProvider>,
   document.getElementById('root')
 );
 

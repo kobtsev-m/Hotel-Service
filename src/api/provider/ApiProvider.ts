@@ -1,52 +1,33 @@
 import { API } from 'aws-amplify';
 import axios, { Axios } from 'axios';
-import { updateJwtToken } from '../utils/aws/auth';
+import { configureAxios } from '../utils/configureAxios';
 
 interface RequestParams {
   request: boolean;
   headers: Record<string, string>;
 }
 
-class Provider {
+class ApiProvider {
   private readonly isAWS: boolean;
   private readonly awsAppName: string;
   private readonly localAxios: Axios;
-
   private readonly params: RequestParams;
 
   constructor() {
     this.isAWS = process.env.REACT_APP_API! === 'aws';
-    this.awsAppName = process.env.REACT_APP_AWS_APP_NAME!;
-    this.localAxios = axios.create({
-      baseURL: process.env.REACT_APP_LOCAL_BASE_URL!
-    });
+    if (this.isAWS) {
+      this.awsAppName = process.env.REACT_APP_AWS_APP_NAME!;
+    } else {
+      this.localAxios = axios.create({ baseURL: process.env.REACT_APP_LOCAL_BASE_URL! });
+    }
     this.params = { request: true, headers: {} };
-    this.setupAxios();
+    configureAxios();
   }
 
-  setupAxios() {
-    axios.interceptors.response.use(
-      (response) => response,
-      async (e) => {
-        const { response, config: request } = e;
-        if (
-          !request._retry &&
-          response?.status === 401 &&
-          response?.data?.errors?.message === 'jwt expired'
-        ) {
-          await updateJwtToken(request);
-          request._retry = true;
-          return axios(request);
-        }
-        return Promise.reject(e);
-      }
-    );
-  }
-
-  updateHeaders(headers: RequestParams['headers']) {
-    Object.keys(headers).forEach((key) => {
-      if (headers[key]) {
-        this.params.headers[key] = headers[key];
+  updateHeaders(headers: Record<string, string | undefined>) {
+    Object.entries(headers).forEach(([key, value]) => {
+      if (value) {
+        this.params.headers[key] = value;
       } else {
         delete this.params.headers[key];
       }
@@ -78,4 +59,4 @@ class Provider {
   }
 }
 
-export default new Provider();
+export default new ApiProvider();

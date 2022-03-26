@@ -1,29 +1,46 @@
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { observer } from 'mobx-react-lite';
 import React, { Fragment } from 'react';
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import { useNavigate } from 'react-router-dom';
 import {
-  DropdownToggle,
-  DropdownMenu,
-  Nav,
-  Col,
-  Row,
   Button,
+  Col,
+  DropdownMenu,
+  DropdownToggle,
+  Nav,
   NavItem,
   NavLink,
+  Row,
   UncontrolledButtonDropdown
 } from 'reactstrap';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-import avatar from '../../../../assets/images/avatar.jpg';
+import { UserRole } from '../../../../../amplify/backend/function/api/src/app/db/constants';
+import { RouteType } from '../../../../router';
+import { useStores } from '../../../../store';
 
-export const UserBox: React.FC = () => {
+export const UserBox: React.FC = observer(() => {
+  const { userStore } = useStores();
+  const navigate = useNavigate();
+
+  const user = userStore.user!;
+
+  const handleLogOut = async () => {
+    await userStore.signOut();
+    navigate(RouteType.Login);
+  };
+
   return (
     <Fragment>
       <div className='header-btn-lg ml-2 pr-0'>
         <div className='widget-content p-0'>
           <div className='widget-content-wrapper'>
             <div className='widget-content-left mr-3 header-user-info'>
-              <div className='widget-heading'>Alina Mclourd</div>
-              <div className='widget-subheading'>VP People Manager</div>
+              <div className='widget-heading'>
+                {user.firstName} {user.lastName}
+                {user.role === UserRole.ADMIN && ' (admin)'}
+              </div>
+              <div className='widget-subheading'>{user.email}</div>
             </div>
             <div className='widget-content-left'>
               <UncontrolledButtonDropdown>
@@ -32,15 +49,13 @@ export const UserBox: React.FC = () => {
                     style={{
                       width: '42px',
                       height: '42px',
-                      background: `url(${avatar})`,
-                      backgroundPosition: 'center',
-                      backgroundSize: 'cover'
+                      background: `#fff`
                     }}
                     className='rounded-circle'
                   />
                   <FontAwesomeIcon className='ml-2 opacity-8' icon={faAngleDown} />
                 </DropdownToggle>
-                <DropdownMenu right className='rm-pointers dropdown-menu-lg mt-3'>
+                <DropdownMenu end className='rm-pointers dropdown-menu-lg mt-3'>
                   <div className='dropdown-menu-header'>
                     <div className='dropdown-menu-header-inner bg-secondary'>
                       <div className='menu-header-image opacity-2' />
@@ -52,21 +67,23 @@ export const UserBox: React.FC = () => {
                                 style={{
                                   width: '42px',
                                   height: '42px',
-                                  background: `url(${avatar})`,
-                                  backgroundPosition: 'center',
-                                  backgroundSize: 'cover'
+                                  background: `#fff`
                                 }}
                                 className='rounded-circle'
                               />
                             </div>
                             <div className='widget-content-left'>
-                              <div className='widget-heading'>Alina Mcloughlin</div>
-                              <div className='widget-subheading opacity-8'>
-                                A short profile description
+                              <div className='widget-heading'>
+                                {user.firstName} {user.lastName}
                               </div>
+                              <div className='widget-subheading opacity-8'>{user.email}</div>
                             </div>
                             <div className='widget-content-right mr-2'>
-                              <Button className='btn-pill btn-shadow btn-shine' color='focus'>
+                              <Button
+                                className='btn-pill btn-shadow btn-shine'
+                                color='focus'
+                                onClick={handleLogOut}
+                              >
                                 Logout
                               </Button>
                             </div>
@@ -75,39 +92,23 @@ export const UserBox: React.FC = () => {
                       </div>
                     </div>
                   </div>
-                  <div
-                    className='scroll-area-xs'
-                    style={{
-                      height: '150px'
-                    }}
-                  >
+                  <div className='scroll-area-xs' style={{ height: '200px' }}>
                     <PerfectScrollbar>
                       <Nav vertical>
                         <NavItem className='nav-item-header'>Activity</NavItem>
                         <NavItem>
                           <NavLink href='#'>
-                            Chat
-                            <div className='ml-auto badge badge-pill badge-info'>8</div>
+                            Rents
+                            <div className='ml-auto badge badge-pill badge-info'>1</div>
                           </NavLink>
-                        </NavItem>
-                        <NavItem>
-                          <NavLink href='#'>Recover Password</NavLink>
+                          <NavLink href='#'>
+                            Service Debt
+                            <div className='ml-auto badge badge-pill badge-info'>100$</div>
+                          </NavLink>
                         </NavItem>
                         <NavItem className='nav-item-header'>My Account</NavItem>
                         <NavItem>
-                          <NavLink href='#'>
-                            Settings
-                            <div className='ml-auto badge badge-success'>New</div>
-                          </NavLink>
-                        </NavItem>
-                        <NavItem>
-                          <NavLink href='#'>
-                            Messages
-                            <div className='ml-auto badge badge-warning'>512</div>
-                          </NavLink>
-                        </NavItem>
-                        <NavItem>
-                          <NavLink href='#'>Logs</NavLink>
+                          <NavLink href='#'>Change Password</NavLink>
                         </NavItem>
                       </Nav>
                     </PerfectScrollbar>
@@ -121,12 +122,10 @@ export const UserBox: React.FC = () => {
                         <Button
                           className='btn-icon-vertical btn-transition btn-transition-alt pt-2 pb-2'
                           outline
-                          color='warning'
+                          color='dark'
                         >
-                          <i className='pe-7s-chat icon-gradient bg-amy-crisp btn-icon-wrapper mb-2'>
-                            {' '}
-                          </i>
-                          Message Inbox
+                          <i className='pe-7s-portfolio btn-icon-wrapper mb-2'> </i>
+                          Organisations
                         </Button>
                       </Col>
                       <Col sm='6'>
@@ -135,22 +134,12 @@ export const UserBox: React.FC = () => {
                           outline
                           color='danger'
                         >
-                          <i className='pe-7s-ticket icon-gradient bg-love-kiss btn-icon-wrapper mb-2'>
-                            {' '}
-                          </i>
-                          <b>Support Tickets</b>
+                          <i className='pe-7s-info btn-icon-wrapper mb-2'> </i>
+                          <b>Support</b>
                         </Button>
                       </Col>
                     </Row>
                   </div>
-                  <Nav vertical>
-                    <NavItem className='nav-item-divider' />
-                    <NavItem className='nav-item-btn text-center'>
-                      <Button size='sm' className='btn-wide' color='primary'>
-                        Open Messages
-                      </Button>
-                    </NavItem>
-                  </Nav>
                 </DropdownMenu>
               </UncontrolledButtonDropdown>
             </div>
@@ -159,4 +148,4 @@ export const UserBox: React.FC = () => {
       </div>
     </Fragment>
   );
-};
+});

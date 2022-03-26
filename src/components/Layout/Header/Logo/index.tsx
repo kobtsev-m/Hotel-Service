@@ -1,6 +1,7 @@
-import React, { Fragment, useState } from 'react';
 // @ts-ignore
 import { Slider } from 'react-burgers';
+
+import React, { Fragment, useState } from 'react';
 
 interface Props {
   toggleIsSideBarOpen: () => void;

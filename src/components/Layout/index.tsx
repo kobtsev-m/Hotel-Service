@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Header } from './Header';
 import { SideBar } from './SideBar';
-import { ToastContainer } from 'react-toastify';
 import cx from 'classnames';
 import ResizeDetector from 'react-resize-detector';
 
@@ -32,10 +31,7 @@ export const Layout: React.FC = ({ children }) => {
               toggleIsSideBarMobile={toggleIsSideBarMobile}
             />
             <div className='app-main__outer'>
-              <div className='app-main__inner'>
-                {children}
-                <ToastContainer />
-              </div>
+              <div className='app-main__inner'>{children}</div>
             </div>
           </div>
         </div>

@@ -1,30 +1,33 @@
+import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Field, Form, Formik } from 'formik';
-import { FormikStatus } from '../../../types/utils/forms';
+import { useStores } from '../../../store';
+import { SignInParams } from '../../../store/stores/user';
 import { Alert, FormGroup, Input } from 'reactstrap';
-import { signIn, SignInParams } from '../../../utils/aws/auth';
 import { ProgressButton } from '../../../components/Buttons/ProgressButton';
 
 interface Props {
   callback?: (...args: any[]) => void;
 }
 
-export const SignInForm: React.FC<Props> = ({ callback }) => {
+export const SignInForm: React.FC<Props> = observer(({ callback }) => {
+  const { userStore } = useStores();
   return (
     <Formik<SignInParams>
       initialValues={{ email: '', password: '' }}
-      onSubmit={async (values, { setStatus }) => {
+      onSubmit={async (values, { setSubmitting, setStatus }) => {
         try {
-          setStatus(FormikStatus.Loading);
-          const token = await signIn(values);
-          callback && callback(token);
-          setStatus(FormikStatus.Success);
+          setSubmitting(true);
+          await userStore.signIn(values);
+          callback && callback();
         } catch (e) {
-          setStatus(FormikStatus.Invalid);
+          setStatus((e as Error).message);
+        } finally {
+          setSubmitting(false);
         }
       }}
     >
-      {({ status }) => (
+      {({ isSubmitting, status }) => (
         <Form>
           <FormGroup>
             <Input tag={Field} id='email-sign-in' name='email' placeholder='Email' type='email' />
@@ -38,18 +41,12 @@ export const SignInForm: React.FC<Props> = ({ callback }) => {
               type='password'
             />
           </FormGroup>
-          {status === FormikStatus.Invalid && (
-            <Alert color='danger'>Incorrect email or password</Alert>
-          )}
+          {status && <Alert color='danger'>{status}</Alert>}
           <div className='d-flex justify-content-end'>
-            <ProgressButton
-              text='Submit'
-              isSubmit={true}
-              isLoading={status === FormikStatus.Loading}
-            />
+            <ProgressButton text='Submit' isSubmit={true} isLoading={isSubmitting} />
           </div>
         </Form>
       )}
     </Formik>
   );
-};
+});

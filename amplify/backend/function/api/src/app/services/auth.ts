@@ -1,6 +1,6 @@
 import axios from 'axios';
-import jwkToPem from 'jwk-to-pem';
 import jwt from 'jsonwebtoken';
+import jwkToPem from 'jwk-to-pem';
 import configs from '../configs';
 
 interface RawPublicKey {
@@ -27,7 +27,7 @@ class AuthService {
   }
 
   async verifyJwt(token) {
-    const tokenSections = (token || '').split('.');
+    const tokenSections = (token ?? '').split('.');
     if (tokenSections.length < 2) {
       throw new Error('Requested token is invalid');
     }

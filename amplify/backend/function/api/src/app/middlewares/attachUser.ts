@@ -1,9 +1,10 @@
 import createError from 'http-errors';
 import { TokenExpiredError } from 'jsonwebtoken';
-import authService from '../services/auth';
 import { User } from '../db/entities';
+import authService from '../services/auth';
+import { AttachUserMiddlewareReq } from '../types/requests';
 
-export const attachUser = async (req, res, next) => {
+export const attachUser = async (req: AttachUserMiddlewareReq, res, next) => {
   try {
     const token = req.header('Authorization').split('Bearer ')[1];
     const payload = await authService.verifyJwt(token);
