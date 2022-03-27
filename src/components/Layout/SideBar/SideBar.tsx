@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
-import { Logo } from '../Header/Logo';
+import { Logo } from '../Header/Logo/Logo';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { Nav } from './Nav';
+import { Nav } from './Nav/Nav';
 
 interface Props {
   toggleIsSideBarOpen: () => void;

@@ -3,7 +3,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { User } from '../../../amplify/backend/function/api/src/app/db/entities';
 import api from '../../api';
 import apiProvider from '../../api/provider/ApiProvider';
-import { RootStore } from './root';
+import { RootStore } from './RootStore';
 
 export interface SignUpParams {
   email: string;

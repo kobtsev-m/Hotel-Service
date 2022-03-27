@@ -1,12 +1,12 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { ScaleLoader } from 'react-spinners';
-import { Layout } from '../../../components/Layout';
+import { Layout } from '../../../components/Layout/Layout';
 import { useAuthCheck } from '../../hooks/useAuthCheck';
-import { RouteType } from '../../routes';
+import { RoutesEnum } from '../../routes/RoutesEnum';
 
-export const PrivateOutlet: React.FC = () => {
-  const { isCheckingAuth, isAuth } = useAuthCheck();
+export const AdminOutlet: React.FC = () => {
+  const { isCheckingAuth, isAuth, isAdmin } = useAuthCheck();
 
   if (isCheckingAuth) {
     return (
@@ -16,11 +16,11 @@ export const PrivateOutlet: React.FC = () => {
     );
   }
 
-  return isAuth ? (
+  return isAuth && isAdmin ? (
     <Layout>
       <Outlet />
     </Layout>
   ) : (
-    <Navigate to={RouteType.Login} />
+    <Navigate to={RoutesEnum.Login} />
   );
 };

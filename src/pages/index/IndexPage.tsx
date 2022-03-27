@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Row } from 'reactstrap';
-import { HotelItem } from './HotelItem';
+import { HotelItem } from './HotelItem/HotelItem';
 import hotelBg1 from '../../assets/images/hotelBg1.png';
 import hotelBg2 from '../../assets/images/hotelBg2.jpg';
 import hotelBg3 from '../../assets/images/hotelBg3.jpg';

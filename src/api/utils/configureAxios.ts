@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { UserStore } from '../../store/stores/user';
+import { UserStore } from '../../store/stores/UserStore';
 
 export const configureAxios = () => {
   axios.interceptors.response.use(

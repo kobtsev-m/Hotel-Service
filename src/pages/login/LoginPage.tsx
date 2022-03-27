@@ -8,9 +8,9 @@ import ScrollableInkTabBar from 'rc-tabs/lib/ScrollableInkTabBar';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardBody, CardTitle, Container } from 'reactstrap';
-import { RouteType } from '../../router';
-import { SignInForm } from './SignInForm';
-import { SignUpForm } from './SignUpForm';
+import { RoutesEnum } from '../../router';
+import { SignInForm } from './SignInForm/SignInForm';
+import { SignUpForm } from './SignUpForm/SignUpForm';
 import { toast } from 'react-toastify';
 
 export const LoginPage: React.FC = () => {
@@ -27,7 +27,7 @@ export const LoginPage: React.FC = () => {
             <CardBody>
               <CardTitle tag='h4'>Sign In</CardTitle>
               <hr />
-              <SignInForm callback={() => navigate(RouteType.Index)} />
+              <SignInForm callback={() => navigate(RoutesEnum.Index)} />
             </CardBody>
           </Card>
         </TabPane>

@@ -3,4 +3,6 @@ import app from './app';
 
 const server = awsServerlessExpress.createServer(app);
 
-exports.handler = (event, context) => awsServerlessExpress.proxy(server, event, context);
+exports.handler = (event, context) => {
+  return awsServerlessExpress.proxy(server, event, context, 'PROMISE').promise;
+};

@@ -2,9 +2,9 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Field, Form, Formik } from 'formik';
 import { useStores } from '../../../store';
-import { SignUpParams } from '../../../store/stores/user';
+import { SignUpParams } from '../../../store/stores/UserStore';
 import { Alert, FormGroup, Input } from 'reactstrap';
-import { ProgressButton } from '../../../components/Buttons/ProgressButton';
+import { ProgressButton } from '../../../components/Buttons';
 
 interface Props {
   callback?: (...args: any[]) => void;

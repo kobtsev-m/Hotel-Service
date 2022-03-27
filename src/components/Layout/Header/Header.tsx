@@ -1,8 +1,8 @@
 import React from 'react';
-import { Logo } from './Logo';
-import { SearchBox } from './SearchBox';
-import { MegaMenu } from './MegaMenu';
-import { UserBox } from './UserBox';
+import { Logo } from './Logo/Logo';
+import { SearchBox } from './SearchBox/SearchBox';
+import { MegaMenu } from './MegaMenu/MegaMenu';
+import { UserBox } from './UserBox/UserBox';
 
 interface Props {
   toggleIsSideBarOpen: () => void;

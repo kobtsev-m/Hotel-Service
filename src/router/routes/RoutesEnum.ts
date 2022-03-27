@@ -1,4 +1,4 @@
-export enum RouteType {
+export enum RoutesEnum {
   Index = '/',
   Login = '/login'
 }

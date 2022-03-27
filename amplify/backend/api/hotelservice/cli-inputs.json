@@ -5,16 +5,7 @@
       "name": "/",
       "lambdaFunction": "api",
       "permissions": {
-        "setting": "protected",
-        "auth": [
-          "create",
-          "read",
-          "update",
-          "delete"
-        ],
-        "guest": [
-          "read"
-        ]
+        "setting": "open"
       }
     }
   }
