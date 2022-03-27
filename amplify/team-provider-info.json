@@ -20,7 +20,7 @@
       "function": {
         "api": {
           "deploymentBucketName": "amplify-hotelservice-dev-20131-deployment",
-          "s3Key": "amplify-builds/api-36595045576d3573756f-build.zip"
+          "s3Key": "amplify-builds/api-716f3067356436654570-build.zip"
         },
         "confirmSignUp": {
           "deploymentBucketName": "amplify-hotelservice-dev-20131-deployment",

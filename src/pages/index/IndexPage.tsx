@@ -17,8 +17,8 @@ export const IndexPage: React.FC = () => {
   ];
   return (
     <Row>
-      {hotels.map((hotel) => (
-        <Col lg='4' sm='6'>
+      {hotels.map((hotel, i) => (
+        <Col key={i} lg='4' sm='6'>
           <HotelItem {...hotel} />
         </Col>
       ))}

@@ -7,7 +7,6 @@ import {
   Card,
   CardBody,
   CardHeader,
-  Col,
   ListGroup,
   ListGroupItem,
   TabContent,
@@ -102,8 +101,8 @@ export const HotelItem: React.FC<Props> = ({ name, img }) => {
               Services
             </h6>
             <ListGroup className='rm-list-borders' flush>
-              {services.map((service) => (
-                <ServiceItem {...service} />
+              {services.map((service, i) => (
+                <ServiceItem key={i} {...service} />
               ))}
             </ListGroup>
           </CardBody>

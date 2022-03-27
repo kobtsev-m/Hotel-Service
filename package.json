@@ -19,7 +19,7 @@
     "loaders.css": "^0.1.2",
     "mobx": "^6.5.0",
     "mobx-react-lite": "^3.3.0",
-    "node-sass": "^5.0.0",
+    "node-sass": "^7.0.1",
     "path": "^0.12.7",
     "pe7-icon": "^1.0.4",
     "rc-tabs": "10.0.0",
