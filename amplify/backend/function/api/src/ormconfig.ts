@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import path from 'path';
 
-const fileExt = process.env.ENV === 'local' ? '.ts' : '.js';
+const filesExt = process.env.MODE === 'local' ? '.ts' : '.js';
 
 export = {
   type: process.env.DB_TYPE,
@@ -9,7 +9,7 @@ export = {
   port: +process.env.DB_PORT,
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
-  entities: [path.join(__dirname, 'app', 'db', 'entities', `!(index)${fileExt}`)],
-  migrations: [path.join(__dirname, 'app', 'db', 'migrations', `*${fileExt}`)],
+  entities: [path.join(__dirname, 'app', 'db', 'entities', `!(index)${filesExt}`)],
+  migrations: [path.join(__dirname, 'app', 'db', 'migrations', `*${filesExt}`)],
   synchronize: false
 };

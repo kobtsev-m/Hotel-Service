@@ -11,10 +11,6 @@ app.use(bodyParser.json());
 app.use(awsServerlessExpressMiddleware.eventContext());
 app.use(cors({ allowedHeaders: ['*'] }));
 
-app.get('/', async (req, res) => {
-  res.json({ test: 'some answer' });
-});
-
 initControllers(app);
 connectToDb();
 

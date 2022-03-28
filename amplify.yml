@@ -5,8 +5,8 @@ backend:
       commands:
         - cd amplify/backend/function/api/src
         - yarn install
-        - yarn typeorm migration:run
         - yarn compile
+        - yarn typeorm migration:run
         - cd ../../../../../
     build:
       commands:
