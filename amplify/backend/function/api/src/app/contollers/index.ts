@@ -1,6 +1,8 @@
 import { Express } from 'express';
-import { userController } from './user';
+import { HotelController } from './hotel.controller';
+import { UserController } from './user.controller';
 
-export const initControllers = (app: Express) => {
-  userController(app);
+export const initRoutes = (app: Express) => {
+  const controllers = [new UserController(app), new HotelController(app)];
+  controllers.forEach((controller) => controller.initRoutes());
 };

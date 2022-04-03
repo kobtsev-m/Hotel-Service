@@ -1,9 +1,7 @@
+import { HotelStore } from './HotelStore';
 import { UserStore } from './UserStore';
 
 export class RootStore {
-  userStore: UserStore;
-
-  constructor() {
-    this.userStore = new UserStore(this);
-  }
+  userStore = new UserStore(this);
+  hotelStore = new HotelStore(this);
 }

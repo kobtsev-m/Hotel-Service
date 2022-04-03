@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "hotelservice_identitypool_21f79fb1",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "hotels21f79fb1",
     "userPoolName": "hotelservice_userpool_21f79fb1",
     "autoVerifiedAttributes": [

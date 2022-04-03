@@ -30,5 +30,11 @@ export type AmplifyDependentResourcesAttributes = {
             "ApiName": "string",
             "ApiId": "string"
         }
+    },
+    "storage": {
+        "hotelservice": {
+            "BucketName": "string",
+            "Region": "string"
+        }
     }
 }

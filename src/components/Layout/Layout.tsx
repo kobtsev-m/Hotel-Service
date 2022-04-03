@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Header } from './Header/Header';
 import { SideBar } from './SideBar/SideBar';
-import cx from 'classnames';
+import { ToastContainer } from 'react-toastify';
+import cn from 'classnames';
 import ResizeDetector from 'react-resize-detector';
 
 export const Layout: React.FC = ({ children }) => {
@@ -14,7 +15,7 @@ export const Layout: React.FC = ({ children }) => {
       handleWidth
       render={({ width }) => (
         <div
-          className={cx(
+          className={cn(
             'app-container app-theme-dark fixed-header fixed-sidebar',
             { 'closed-sidebar': (!isSideBarMobile && !isSideBarOpen) || (width ?? 0) < 1250 },
             { 'closed-sidebar-mobile': (isSideBarMobile && !isSideBarOpen) || (width ?? 0) < 1250 },
@@ -34,6 +35,12 @@ export const Layout: React.FC = ({ children }) => {
               <div className='app-main__inner'>{children}</div>
             </div>
           </div>
+          <ToastContainer
+            autoClose={5000}
+            hideProgressBar={true}
+            pauseOnHover={true}
+            closeOnClick={true}
+          />
         </div>
       )}
     />

@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
 import configs from './configs';
-import { initControllers } from './contollers';
+import { initRoutes } from './contollers';
 import { connectToDb } from './db';
 
 const app = express();
@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(awsServerlessExpressMiddleware.eventContext());
 app.use(cors({ allowedHeaders: ['*'] }));
 
-initControllers(app);
+initRoutes(app);
 connectToDb();
 
 app.listen(configs.server.port, () => {

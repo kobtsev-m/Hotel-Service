@@ -16,7 +16,7 @@ import {
   UncontrolledButtonDropdown
 } from 'reactstrap';
 import { UserRole } from '../../../../../amplify/backend/function/api/src/app/db/constants';
-import { RoutesEnum } from '../../../../router';
+import { AppRoutes } from '../../../../router';
 import { useStores } from '../../../../store';
 
 export const UserBox: React.FC = observer(() => {
@@ -27,7 +27,7 @@ export const UserBox: React.FC = observer(() => {
 
   const handleLogOut = async () => {
     await userStore.signOut();
-    navigate(RoutesEnum.Login);
+    navigate(AppRoutes.Login);
   };
 
   return (

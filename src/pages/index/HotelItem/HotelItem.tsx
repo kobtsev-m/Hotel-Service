@@ -13,14 +13,14 @@ import {
   TabPane
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Hotel } from '../../../../amplify/backend/function/api/src/app/db/entities';
 import cn from 'classnames';
 
 interface Props {
-  name: string;
-  img: string;
+  hotel: Hotel;
 }
 
-export const HotelItem: React.FC<Props> = ({ name, img }) => {
+export const HotelItem: React.FC<Props> = ({ hotel }) => {
   const [activeTab, setActiveTab] = useState<'1' | '2'>('1');
 
   const services = [
@@ -38,9 +38,9 @@ export const HotelItem: React.FC<Props> = ({ name, img }) => {
           className='dropdown-menu-header-inner bg-focus d-flex align-items-end'
           style={{ height: '16rem' }}
         >
-          <div className='menu-header-image opacity-5' style={{ backgroundImage: `url(${img})` }} />
+          <div className='menu-header-image opacity-5' style={{ backgroundImage: `url(_)` }} />
           <div className='menu-header-content text-left'>
-            <h5 className='menu-header-title'>{name}</h5>
+            <h5 className='menu-header-title'>_</h5>
             <h6 className='menu-header-subtitle'>
               5 <i className='pe-7s-star ml-1'> </i>
             </h6>

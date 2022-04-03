@@ -1,27 +1,30 @@
-import React from 'react';
+import { observer } from 'mobx-react-lite';
+import React, { Fragment, useEffect } from 'react';
+import { FadeLoader } from 'react-spinners';
 import { Col, Row } from 'reactstrap';
+import { useStores } from '../../store';
 import { HotelItem } from './HotelItem/HotelItem';
-import hotelBg1 from '../../assets/images/hotelBg1.png';
-import hotelBg2 from '../../assets/images/hotelBg2.jpg';
-import hotelBg3 from '../../assets/images/hotelBg3.jpg';
-import hotelBg4 from '../../assets/images/hotelBg4.jpg';
-import hotelBg5 from '../../assets/images/hotelBg5.jpg';
 
-export const IndexPage: React.FC = () => {
-  const hotels = [
-    { name: 'Horizon Patio', img: hotelBg1 },
-    { name: 'Metropolis', img: hotelBg2 },
-    { name: 'Sunset Lodge', img: hotelBg3 },
-    { name: 'Crowne Plaza', img: hotelBg4 },
-    { name: 'Mounty', img: hotelBg5 }
-  ];
+export const IndexPage: React.FC = observer(() => {
+  const { hotelStore } = useStores();
+
+  useEffect(() => {
+    hotelStore.getItems();
+  }, []);
+
   return (
     <Row>
-      {hotels.map((hotel, i) => (
-        <Col key={i} lg='4' sm='6'>
-          <HotelItem {...hotel} />
-        </Col>
-      ))}
+      {hotelStore.isLoading ? (
+        <FadeLoader />
+      ) : (
+        <Fragment>
+          {hotelStore.hotels.map((hotel, i) => (
+            <Col key={i} lg='4' sm='6'>
+              <HotelItem hotel={hotel} />
+            </Col>
+          ))}
+        </Fragment>
+      )}
     </Row>
   );
-};
+});

@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { ScaleLoader } from 'react-spinners';
 import { Layout } from '../../../components/Layout/Layout';
 import { useAuthCheck } from '../../hooks/useAuthCheck';
-import { RoutesEnum } from '../../routes/RoutesEnum';
+import { AppRoutes } from '../../routes/AppRoutes';
 
 export const AdminOutlet: React.FC = () => {
   const { isCheckingAuth, isAuth, isAdmin } = useAuthCheck();
@@ -21,6 +21,6 @@ export const AdminOutlet: React.FC = () => {
       <Outlet />
     </Layout>
   ) : (
-    <Navigate to={RoutesEnum.Login} />
+    <Navigate to={AppRoutes.Login} />
   );
 };

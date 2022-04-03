@@ -15,12 +15,13 @@
     "categories": {
       "auth": {
         "undefined": {},
-        "hotelservice": {}
+        "hotelservice": {},
+        "true": {}
       },
       "function": {
         "api": {
           "deploymentBucketName": "amplify-hotelservice-dev-20131-deployment",
-          "s3Key": "amplify-builds/api-716f3067356436654570-build.zip"
+          "s3Key": "amplify-builds/api-4c6c6c766f7275486649-build.zip"
         },
         "confirmSignUp": {
           "deploymentBucketName": "amplify-hotelservice-dev-20131-deployment",
