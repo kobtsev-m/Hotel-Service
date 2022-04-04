@@ -6,7 +6,7 @@ import { useAuthCheck } from '../../hooks/useAuthCheck';
 import { AppRoutes } from '../../routes/AppRoutes';
 
 export const PrivateOutlet: React.FC = () => {
-  const { isCheckingAuth, isAuth } = useAuthCheck();
+  const { isCheckingAuth } = useAuthCheck();
 
   if (isCheckingAuth) {
     return (
@@ -16,11 +16,9 @@ export const PrivateOutlet: React.FC = () => {
     );
   }
 
-  return isAuth ? (
+  return (
     <Layout>
       <Outlet />
     </Layout>
-  ) : (
-    <Navigate to={AppRoutes.Login} />
   );
 };

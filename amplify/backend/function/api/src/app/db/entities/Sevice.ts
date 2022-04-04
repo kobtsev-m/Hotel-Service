@@ -9,13 +9,16 @@ export class Service extends BaseEntity {
   @Column({ type: 'varchar', length: 255 })
   name: string;
 
+  @Column({ type: 'text' })
+  description: string;
+
   @Column({ type: 'boolean' })
   isAdditional: boolean;
 
   @Column({ type: 'int' })
   totalPrice: number;
 
-  @ManyToMany(() => Hotel)
+  @ManyToMany(() => Hotel, (hotel) => hotel.services)
   @JoinTable({
     name: 'services_hotels',
     joinColumn: {

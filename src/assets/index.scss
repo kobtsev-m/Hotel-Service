@@ -72,6 +72,8 @@
 @import "template/elements/chat";
 @import "template/elements/forms-wizard";
 
+@import "override/elements/dropdown";
+
 // DASHBOARD BOXES
 
 @import "template/widgets/chart-boxes/chart-boxes";
@@ -162,3 +164,7 @@
 // Responsive
 
 @import "template/layout/responsive/responsive-base";
+
+// APP
+
+@import "app/base";

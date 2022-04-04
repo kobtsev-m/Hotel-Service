@@ -7,6 +7,9 @@ export class Organisation extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column({ type: 'varchar', length: 255 })
+  name: string;
+
   @Column({
     type: 'enum',
     enum: Priority,

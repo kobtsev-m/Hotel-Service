@@ -12,7 +12,7 @@ export type UserPostReq = IRequest<UserPartial>;
 export type UserPostRes = IResponse<User>;
 
 // hotels controller
-export type HotelPartial = Pick<Hotel, 'floorsTotal' | 'apartments' | 'roomsForFloor'>;
+export type HotelPartial = Pick<Hotel, 'floorsTotal' | 'apartments'>;
 export type HotelsGetReq = object;
 export type HotelsGetRes = IResponse<Hotel[]>;
 export type HotelsPostReq = IRequest<HotelPartial>;

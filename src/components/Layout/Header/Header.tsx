@@ -11,7 +11,7 @@ interface Props {
 
 export const Header: React.FC<Props> = (props) => {
   return (
-    <div className='app-header header-shadow bg-dark header-text-light'>
+    <div className='app-header header-shadow bg-light header-text-dark'>
       <Logo {...props} />
       <div className='app-header__content'>
         <div className='app-header-left'>

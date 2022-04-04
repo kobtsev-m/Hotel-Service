@@ -12,7 +12,7 @@ export const SideBar: React.FC<Props> = (props) => {
   return (
     <Fragment>
       <div className='sidebar-mobile-overlay' />
-      <div className='app-sidebar sidebar-shadow bg-dark header-text-light'>
+      <div className='app-sidebar sidebar-shadow bg-light header-text-dark'>
         <Logo {...props} />
         <PerfectScrollbar>
           <div className='app-sidebar__inner'>

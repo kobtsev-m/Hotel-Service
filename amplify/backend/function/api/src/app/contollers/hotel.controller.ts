@@ -9,7 +9,7 @@ export class HotelController extends BaseController {
   }
 
   private async getItems(_, res: HotelsGetRes) {
-    const hotels = await Hotel.find();
+    const hotels = await Hotel.find({ relations: ['services'] });
     res.json(hotels);
   }
 }

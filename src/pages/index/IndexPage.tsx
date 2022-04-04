@@ -1,30 +1,36 @@
 import { observer } from 'mobx-react-lite';
 import React, { Fragment, useEffect } from 'react';
-import { FadeLoader } from 'react-spinners';
+import { BarLoader } from 'react-spinners';
 import { Col, Row } from 'reactstrap';
+import { UserRole } from '../../../amplify/backend/function/api/src/app/db/constants';
+import { PageTitle } from '../../components/PageTitle/PageTitle';
 import { useStores } from '../../store';
 import { HotelItem } from './HotelItem/HotelItem';
 
 export const IndexPage: React.FC = observer(() => {
-  const { hotelStore } = useStores();
+  const { userStore, hotelStore } = useStores();
 
   useEffect(() => {
     hotelStore.getItems();
   }, []);
 
   return (
-    <Row>
+    <Fragment>
+      <PageTitle />
+      {userStore.user?.role === UserRole.ADMIN && <div>I am admin</div>}
       {hotelStore.isLoading ? (
-        <FadeLoader />
+        <Row className='w-100 justify-content-center my-4'>
+          <BarLoader />
+        </Row>
       ) : (
-        <Fragment>
+        <Row>
           {hotelStore.hotels.map((hotel, i) => (
             <Col key={i} lg='4' sm='6'>
               <HotelItem hotel={hotel} />
             </Col>
           ))}
-        </Fragment>
+        </Row>
       )}
-    </Row>
+    </Fragment>
   );
 });

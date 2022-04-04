@@ -7,18 +7,21 @@ export class Hotel extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column({ type: 'varchar', length: 255 })
+  name: string;
+
+  @Column({ type: 'text' })
+  description: string;
+
   @Column({ type: 'smallint' })
   stars: number;
 
   @Column({ type: 'smallint' })
   floorsTotal: number;
 
-  @Column({ type: 'smallint', array: true })
-  roomsForFloor: number[];
-
   @OneToMany(() => Apartment, (apartment) => apartment.hotel)
   apartments: Apartment[];
 
-  @ManyToMany(() => Service)
+  @ManyToMany(() => Service, (service) => service.hotels)
   services: Service[];
 }

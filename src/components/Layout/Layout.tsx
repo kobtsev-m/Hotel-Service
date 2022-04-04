@@ -16,7 +16,7 @@ export const Layout: React.FC = ({ children }) => {
       render={({ width }) => (
         <div
           className={cn(
-            'app-container app-theme-dark fixed-header fixed-sidebar',
+            'app-container app-theme-light fixed-header fixed-sidebar',
             { 'closed-sidebar': (!isSideBarMobile && !isSideBarOpen) || (width ?? 0) < 1250 },
             { 'closed-sidebar-mobile': (isSideBarMobile && !isSideBarOpen) || (width ?? 0) < 1250 },
             { 'sidebar-mobile-open': isSideBarMobile && isSideBarOpen }

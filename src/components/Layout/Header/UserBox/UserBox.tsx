@@ -16,18 +16,15 @@ import {
   UncontrolledButtonDropdown
 } from 'reactstrap';
 import { UserRole } from '../../../../../amplify/backend/function/api/src/app/db/constants';
-import { AppRoutes } from '../../../../router';
 import { useStores } from '../../../../store';
 
 export const UserBox: React.FC = observer(() => {
   const { userStore } = useStores();
-  const navigate = useNavigate();
 
-  const user = userStore.user!;
+  const user = userStore.user;
 
   const handleLogOut = async () => {
     await userStore.signOut();
-    navigate(AppRoutes.Login);
   };
 
   return (
@@ -35,53 +32,49 @@ export const UserBox: React.FC = observer(() => {
       <div className='header-btn-lg ml-2 pr-0'>
         <div className='widget-content p-0'>
           <div className='widget-content-wrapper'>
-            <div className='widget-content-left mr-3 header-user-info'>
-              <div className='widget-heading'>
-                {user.firstName} {user.lastName}
-                {user.role === UserRole.ADMIN && ' (admin)'}
+            {user && (
+              <div className='widget-content-left mr-3 header-user-info'>
+                <div className='widget-heading'>
+                  {user.firstName} {user.lastName}
+                  {user.role === UserRole.ADMIN && ' (admin)'}
+                </div>
+                <div className='widget-subheading'>{user.email}</div>
               </div>
-              <div className='widget-subheading'>{user.email}</div>
-            </div>
+            )}
             <div className='widget-content-left'>
-              <UncontrolledButtonDropdown>
+              <UncontrolledButtonDropdown disabled={!user}>
                 <DropdownToggle color='link' className='d-flex align-items-center p-0'>
                   <div
-                    style={{
-                      width: '42px',
-                      height: '42px',
-                      background: `#fff`
-                    }}
-                    className='rounded-circle'
+                    className='rounded-circle bg-dark'
+                    style={{ width: '42px', height: '42px' }}
                   />
                   <FontAwesomeIcon className='ml-2 opacity-8' icon={faAngleDown} />
                 </DropdownToggle>
                 <DropdownMenu end className='rm-pointers dropdown-menu-lg mt-3'>
                   <div className='dropdown-menu-header'>
-                    <div className='dropdown-menu-header-inner bg-secondary'>
+                    <div className='dropdown-menu-header-inner'>
                       <div className='menu-header-image opacity-2' />
                       <div className='menu-header-content text-left'>
                         <div className='widget-content p-0'>
                           <div className='widget-content-wrapper'>
                             <div className='widget-content-left mr-3'>
                               <div
-                                style={{
-                                  width: '42px',
-                                  height: '42px',
-                                  background: `#fff`
-                                }}
-                                className='rounded-circle'
+                                className='rounded-circle bg-dark'
+                                style={{ width: '42px', height: '42px' }}
                               />
                             </div>
-                            <div className='widget-content-left'>
-                              <div className='widget-heading'>
-                                {user.firstName} {user.lastName}
+                            {user && (
+                              <div className='widget-content-left'>
+                                <div className='widget-heading'>
+                                  {user.firstName} {user.lastName}
+                                </div>
+                                <div className='widget-subheading opacity-8'>{user.email}</div>
                               </div>
-                              <div className='widget-subheading opacity-8'>{user.email}</div>
-                            </div>
+                            )}
                             <div className='widget-content-right mr-2'>
                               <Button
                                 className='btn-pill btn-shadow btn-shine'
-                                color='focus'
+                                color='dark'
                                 onClick={handleLogOut}
                               >
                                 Logout
@@ -92,6 +85,7 @@ export const UserBox: React.FC = observer(() => {
                       </div>
                     </div>
                   </div>
+                  <hr className='mt-0' />
                   <div className='scroll-area-xs' style={{ height: '200px' }}>
                     <PerfectScrollbar>
                       <Nav vertical>
@@ -122,7 +116,7 @@ export const UserBox: React.FC = observer(() => {
                         <Button
                           className='btn-icon-vertical btn-transition btn-transition-alt pt-2 pb-2'
                           outline
-                          color='dark'
+                          color='primary'
                         >
                           <i className='pe-7s-portfolio btn-icon-wrapper mb-2'> </i>
                           Organisations
@@ -132,7 +126,7 @@ export const UserBox: React.FC = observer(() => {
                         <Button
                           className='btn-icon-vertical btn-transition btn-transition-alt pt-2 pb-2'
                           outline
-                          color='danger'
+                          color='primary'
                         >
                           <i className='pe-7s-info btn-icon-wrapper mb-2'> </i>
                           <b>Support</b>

@@ -15,6 +15,12 @@ export class Apartment extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column({ type: 'varchar', length: 255 })
+  name: string;
+
+  @Column({ type: 'text' })
+  description: string;
+
   @Column({ type: 'smallint' })
   floor: number;
 
@@ -23,6 +29,9 @@ export class Apartment extends BaseEntity {
 
   @Column({ type: 'int' })
   pricePerDay: number;
+
+  @Column({ type: 'int' })
+  availableCount: number;
 
   @ManyToOne(() => Hotel, (hotel) => hotel.apartments)
   @JoinColumn({ name: 'hotelId' })

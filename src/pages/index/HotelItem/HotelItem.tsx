@@ -9,11 +9,13 @@ import {
   CardHeader,
   ListGroup,
   ListGroupItem,
+  Spinner,
   TabContent,
   TabPane
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Hotel } from '../../../../amplify/backend/function/api/src/app/db/entities';
+import { Hotel, Service } from '../../../../amplify/backend/function/api/src/app/db/entities';
+import { useProgressiveImageMultiple } from '../../../hooks';
 import cn from 'classnames';
 
 interface Props {
@@ -22,6 +24,7 @@ interface Props {
 
 export const HotelItem: React.FC<Props> = ({ hotel }) => {
   const [activeTab, setActiveTab] = useState<'1' | '2'>('1');
+  const [imageSources, isImagesLoading] = useProgressiveImageMultiple(`hotels/${hotel['id']}`);
 
   const services = [
     { name: 'Spa', price: 100 },
@@ -35,22 +38,30 @@ export const HotelItem: React.FC<Props> = ({ hotel }) => {
     <Card className='main-card mb-3'>
       <div className='dropdown-menu-header'>
         <div
-          className='dropdown-menu-header-inner bg-focus d-flex align-items-end'
+          className='dropdown-menu-header-inner bg-dark d-flex align-items-end'
           style={{ height: '16rem' }}
         >
-          <div className='menu-header-image opacity-5' style={{ backgroundImage: `url(_)` }} />
+          <div
+            className='menu-header-image'
+            style={{ backgroundImage: imageSources ? `url(${imageSources[0]})` : 'none' }}
+          />
+          {isImagesLoading && (
+            <Spinner className='image-loader' size='sm'>
+              {' '}
+            </Spinner>
+          )}
           <div className='menu-header-content text-left'>
-            <h5 className='menu-header-title'>_</h5>
+            <h5 className='menu-header-title'>{hotel['name']}</h5>
             <h6 className='menu-header-subtitle'>
-              5 <i className='pe-7s-star ml-1'> </i>
+              {hotel['stars']} <i className='pe-7s-star ml-1'> </i>
             </h6>
             <div className='menu-header-btn-pane'>
-              <Button size='sm' color='primary' className='mr-2'>
-                View apartments
-              </Button>
-              <Button size='sm' className='btn-icon btn-icon-only' color='light'>
+              <Button size='sm' className='mr-2' color='light'>
                 Open
                 <FontAwesomeIcon icon={faUpRightFromSquare} className='ml-2' />
+              </Button>
+              <Button size='sm' color='primary'>
+                View apartments
               </Button>
             </div>
           </div>
@@ -62,7 +73,7 @@ export const HotelItem: React.FC<Props> = ({ hotel }) => {
             <ButtonGroup size='lg'>
               <Button
                 caret='true'
-                color='focus'
+                color='dark'
                 className={cn('btn-pill pl-3', {
                   active: activeTab === '1'
                 })}
@@ -71,7 +82,7 @@ export const HotelItem: React.FC<Props> = ({ hotel }) => {
                 Description
               </Button>
               <Button
-                color='focus'
+                color='dark'
                 className={cn('btn-pill pr-3', {
                   active: activeTab === '2'
                 })}
@@ -87,12 +98,7 @@ export const HotelItem: React.FC<Props> = ({ hotel }) => {
         <TabPane tabId='1'>
           <CardBody>
             <h5 className='menu-header-title'>Description</h5>
-            {/*<h6 className='menu-header-subtitle'>Total performance for this month</h6>*/}
-            <p className='mt-2'>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur consequatur ex in
-              laboriosam maxime, minima reprehenderit sint voluptatibus. Accusamus aperiam at aut
-              excepturi harum in nihil non saepe similique vel?
-            </p>
+            <p className='mt-2'>{hotel['description']}</p>
           </CardBody>
         </TabPane>
         <TabPane tabId='2'>
@@ -101,8 +107,8 @@ export const HotelItem: React.FC<Props> = ({ hotel }) => {
               Services
             </h6>
             <ListGroup className='rm-list-borders' flush>
-              {services.map((service, i) => (
-                <ServiceItem key={i} {...service} />
+              {hotel['services'].map((service, i) => (
+                <ServiceItem key={i} service={service} />
               ))}
             </ListGroup>
           </CardBody>
@@ -113,39 +119,39 @@ export const HotelItem: React.FC<Props> = ({ hotel }) => {
 };
 
 interface ServiceProps {
-  name: string;
-  price: number;
+  service: Service;
 }
 
-const ServiceItem: React.FC<ServiceProps> = ({ name, price }) => {
+const ServiceItem: React.FC<ServiceProps> = ({ service }) => {
   return (
     <ListGroupItem>
       <div className='widget-content p-0'>
         <div className='widget-content-wrapper'>
           <div className='widget-content-left mr-3'>
-            <div
-              style={{ width: '42px', height: '42px', background: '#424242' }}
-              className='rounded-circle'
-            />
+            <div className='rounded-circle bg-dark' style={{ width: '42px', height: '42px' }} />
           </div>
           <div className='widget-content-left'>
-            <div className='widget-heading'>{name}</div>
-            <div className='widget-subheading'>Not included</div>
-          </div>
-          <div className='widget-content-right'>
-            <div className='font-size-xlg text-muted'>
-              <small className='opacity-5 pr-1'>$</small>
-              <CountUp
-                start={0}
-                end={price}
-                separator=''
-                decimals={0}
-                decimal='.'
-                prefix=''
-                duration={1}
-              />
+            <div className='widget-heading'>{service['name']}</div>
+            <div className='widget-subheading'>
+              {service['isAdditional'] ? 'Not included' : 'Included'}
             </div>
           </div>
+          {service['isAdditional'] && (
+            <div className='widget-content-right'>
+              <div className='font-size-xlg text-muted'>
+                <small className='opacity-5 pr-1'>$</small>
+                <CountUp
+                  start={0}
+                  end={service['totalPrice']}
+                  separator=''
+                  decimals={0}
+                  decimal='.'
+                  prefix=''
+                  duration={1}
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </ListGroupItem>

@@ -11,5 +11,9 @@ export = {
   password: process.env.DB_PASSWORD,
   entities: [path.join(__dirname, 'app', 'db', 'entities', `!(index)${filesExt}`)],
   migrations: [path.join(__dirname, 'app', 'db', 'migrations', `*${filesExt}`)],
+  cli: {
+    entitiesDir: path.join('app', 'db', 'entities'),
+    migrationsDir: path.join('app', 'db', 'migrations')
+  },
   synchronize: false
 };
