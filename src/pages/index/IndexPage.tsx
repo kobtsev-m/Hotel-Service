@@ -1,23 +1,24 @@
 import { observer } from 'mobx-react-lite';
 import React, { Fragment, useEffect } from 'react';
 import { BarLoader } from 'react-spinners';
-import { Col, Row } from 'reactstrap';
-import { UserRole } from '../../../amplify/backend/function/api/src/app/db/constants';
+import { Row, Col } from 'reactstrap';
 import { PageTitle } from '../../components/PageTitle/PageTitle';
 import { useStores } from '../../store';
 import { HotelItem } from './HotelItem/HotelItem';
 
 export const IndexPage: React.FC = observer(() => {
-  const { userStore, hotelStore } = useStores();
+  const { hotelStore } = useStores();
 
   useEffect(() => {
+    if (hotelStore.hotels.length) {
+      return;
+    }
     hotelStore.getItems();
   }, []);
 
   return (
     <Fragment>
-      <PageTitle />
-      {userStore.user?.role === UserRole.ADMIN && <div>I am admin</div>}
+      <PageTitle title='Hotels' subtitle='Some description' />
       {hotelStore.isLoading ? (
         <Row className='w-100 justify-content-center my-4'>
           <BarLoader />

@@ -14,6 +14,7 @@ export const useAuthCheck = () => {
         await userStore.authUserByJWT();
         setIsAuth(true);
         setIsAdmin(userStore.user?.role === UserRole.ADMIN);
+      } catch (e) {
       } finally {
         setIsCheckingAuth(false);
       }

@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import { BarLoader } from 'react-spinners';
 
-type Color = 'primary' | 'danger' | 'warning' | 'success' | 'secondary' | 'info';
+type Color = 'primary' | 'danger' | 'warning' | 'success' | 'secondary' | 'info' | 'dark';
 
 interface Props {
   text: string;
@@ -11,6 +11,7 @@ interface Props {
   isSubmit?: boolean;
   onClick?: (() => void) | (() => Promise<void>);
   className?: string;
+  sm?: boolean;
 }
 
 export const ProgressButton: React.FC<Props> = ({
@@ -19,19 +20,22 @@ export const ProgressButton: React.FC<Props> = ({
   isLoading,
   isSubmit,
   onClick,
-  className
+  className,
+  sm
 }) => {
-  const initialCN = 'd-flex justify-content-center align-items-center';
+  const initialClassName = 'd-flex justify-content-center align-items-center';
+  const targetStyle = sm ? { minWidth: '4rem' } : { minWidth: '8rem' };
   return (
     <Button
       type={isSubmit ? 'submit' : 'button'}
       color={color ?? 'primary'}
       disabled={isLoading}
-      style={{ width: '8rem', height: '2.2rem' }}
-      className={className ? `${initialCN} ${className}` : initialCN}
+      className={className ? `${initialClassName} ${className}` : initialClassName}
+      style={targetStyle}
       onClick={onClick ?? (() => {})}
+      size={sm ? 'sm' : 'lg'}
     >
-      {isLoading ? <BarLoader color='#fff' /> : text}
+      {isLoading ? <BarLoader width={sm ? 40 : 90} color='#fff' /> : text}
     </Button>
   );
 };

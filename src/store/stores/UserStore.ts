@@ -69,11 +69,22 @@ export class UserStore {
   static async updateJwtToken(request?: any) {
     const session = await Auth.currentSession();
     const token = session.getAccessToken().getJwtToken();
-    apiProvider.updateHeaders({ Authorization: `Bearer ${token}` });
-    request && (request.headers.Authorization = `Bearer ${token}`);
+    if (token) {
+      apiProvider.updateHeaders({ Authorization: `Bearer ${token}` });
+      request && (request.headers.Authorization = `Bearer ${token}`);
+    } else {
+      apiProvider.updateHeaders({ Authorization: undefined });
+      request && delete request.headers.Authorization;
+    }
   }
 
   async signOut() {
+    this.isLoading = true;
     await Auth.signOut();
+
+    runInAction(() => {
+      this.user = null;
+      this.isLoading = false;
+    });
   }
 }

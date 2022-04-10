@@ -3,7 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
-export const PageTitle: React.FC = () => {
+interface Props {
+  title: string;
+  subtitle: string;
+}
+
+export const PageTitle: React.FC<Props> = ({ title, subtitle }) => {
   return (
     <div className='app-page-title bg-premium-light'>
       <div className='page-title-wrapper'>
@@ -12,8 +17,8 @@ export const PageTitle: React.FC = () => {
             <i className='pe-7s-bandaid icon-gradient bg-amy-crisp' />
           </div>
           <div>
-            Hotels
-            <div className='page-title-subheading'>Some description</div>
+            {title}
+            <div className='page-title-subheading'>{subtitle}</div>
           </div>
         </div>
         <div className='page-title-actions'>
@@ -23,7 +28,7 @@ export const PageTitle: React.FC = () => {
                 <FontAwesomeIcon icon={faHome} />
               </a>
             </BreadcrumbItem>
-            <BreadcrumbItem active>Hotels</BreadcrumbItem>
+            <BreadcrumbItem active>{title}</BreadcrumbItem>
           </Breadcrumb>
         </div>
       </div>

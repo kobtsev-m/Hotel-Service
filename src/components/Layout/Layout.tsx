@@ -6,7 +6,7 @@ import cn from 'classnames';
 import ResizeDetector from 'react-resize-detector';
 
 export const Layout: React.FC = ({ children }) => {
-  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const [isSideBarOpen, setIsSideBarOpen] = useState(true);
   const [isSideBarMobile, setIsSideBarMobile] = useState(false);
   const toggleIsSideBarOpen = () => setIsSideBarOpen((prev) => !prev);
   const toggleIsSideBarMobile = () => setIsSideBarMobile((prev) => !prev);

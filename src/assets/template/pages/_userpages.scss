@@ -1,9 +1,11 @@
 // User Pages
 
 .app-logo {
-  height: $logo-height;
-  width: $logo-width;
-  //background:url('~assets/utils/images/logo-inverse.png');
+  height: 30px;
+  width: 100px;
+  background-image: url('../../images/logo.png');
+  background-size: 200%;
+  background-position: center;
 }
 
 .app-logo-inverse {
@@ -14,7 +16,7 @@
 
 .app-login-box {
   .app-logo {
-    margin-bottom: $layout-spacer-lg;
+    margin-bottom: 2rem;
   }
 
   h4 {

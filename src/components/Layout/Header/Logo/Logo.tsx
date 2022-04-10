@@ -14,7 +14,7 @@ export const Logo: React.FC<Props> = ({ toggleIsSideBarOpen }) => {
   return (
     <Fragment>
       <div className='app-header__logo p-0'>
-        <div className='logo-src' />
+        <div className='logo-src ml-3' />
         <div className='header__pane ml-auto'>
           <div onClick={toggleIsSideBarOpen}>
             <Slider

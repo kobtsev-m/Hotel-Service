@@ -1,3 +1,7 @@
+// LIBRARIES
+
+@import "react-toastify/dist/ReactToastify.min.css";
+
 // BOOTSTRAP 4 VARIABLES
 
 @import "template/components/bootstrap4/functions";
@@ -107,7 +111,6 @@
 
 // Notifications
 @import "template/components/notifications/sweetalerts";
-@import "template/components/notifications/toastify";
 
 // Modals
 @import "template/components/modals/rodal";
