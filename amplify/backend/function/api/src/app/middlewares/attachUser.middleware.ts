@@ -2,9 +2,8 @@ import createError from 'http-errors';
 import { TokenExpiredError } from 'jsonwebtoken';
 import { User } from '../db/entities';
 import authService from '../services/auth.service';
-import { AttachUserMiddlewareReq } from '../types/requests';
 
-export const attachUser = async (req: AttachUserMiddlewareReq, res, next) => {
+export const attachUser = async (req, res, next) => {
   try {
     const authorizationHeader = req.header('Authorization');
     if (!authorizationHeader) {

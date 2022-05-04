@@ -1,17 +1,46 @@
-import { ApiRoutes } from '../../../amplify/backend/function/api/src/app/api-routes';
-import { Hotel, User } from '../../../amplify/backend/function/api/src/app/db/entities';
-import { UserPartial } from '../../../amplify/backend/function/api/src/app/types/requests';
+import {
+  ApartmentDelRes,
+  ApartmentGetRes,
+  ApartmentPostReq,
+  ApartmentPostRes,
+  ApartmentPutReq,
+  ApartmentPutRes,
+  ApiRoutes,
+  HotelsGetRes,
+  UserGetRes,
+  UserPostReq,
+  UserPostRes
+} from '../../../amplify/backend/function/api/src/app/types';
+import { FromApi } from '../utils/inferApiTypes';
 import apiProvider from '../provider/ApiProvider';
+import qs from 'qs';
 
 class ApiService {
   getUser() {
-    return apiProvider.get<User>(ApiRoutes.User);
+    return apiProvider.get<FromApi<UserGetRes>>(ApiRoutes.User);
   }
-  createUser(params: UserPartial) {
-    return apiProvider.post<User, UserPartial>(ApiRoutes.User, params);
+  createUser(data: FromApi<UserPostReq>) {
+    return apiProvider.post<FromApi<UserPostRes>>(ApiRoutes.User, data);
   }
+
   getHotels() {
-    return apiProvider.get<Hotel[]>(ApiRoutes.Hotels);
+    return apiProvider.get<FromApi<HotelsGetRes>>(ApiRoutes.Hotels);
+  }
+
+  getApartments(offset: number, limit: number) {
+    const query = qs.stringify({ offset, limit }, { addQueryPrefix: true });
+    return apiProvider.get<FromApi<ApartmentGetRes>>(ApiRoutes.Apartments + query);
+  }
+  createApartment(data: FromApi<ApartmentPostReq>) {
+    return apiProvider.post<FromApi<ApartmentPostRes>>(ApiRoutes.Apartments, data);
+  }
+  updateApartment(id: string, data: FromApi<ApartmentPutReq>) {
+    const url = ApiRoutes.ApartmentItem.replace(':id', id);
+    return apiProvider.put<FromApi<ApartmentPutRes>>(url, data);
+  }
+  deleteApartment(id: string) {
+    const url = ApiRoutes.ApartmentItem.replace(':id', id);
+    return apiProvider.delete<FromApi<ApartmentDelRes>>(url);
   }
 }
 

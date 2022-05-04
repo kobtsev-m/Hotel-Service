@@ -9,14 +9,14 @@ import bg2 from '../../assets/images/pexels-valeria-boltneva-827528.jpg';
 export const SignUpPage: React.FC = () => {
   const sliderSettings = {
     dots: true,
-    infinite: true,
-    speed: 500,
+    infinite: false,
+    speed: 0,
     arrows: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     fade: true,
     initialSlide: 0,
-    autoplay: true,
+    autoplay: false,
     adaptiveHeight: true
   };
   return (

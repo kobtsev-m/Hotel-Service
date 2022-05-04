@@ -10,7 +10,7 @@ export const IndexPage: React.FC = observer(() => {
   const { hotelStore } = useStores();
 
   useEffect(() => {
-    if (hotelStore.hotels.length) {
+    if (hotelStore.isFetched) {
       return;
     }
     hotelStore.getItems();
@@ -18,7 +18,7 @@ export const IndexPage: React.FC = observer(() => {
 
   return (
     <Fragment>
-      <PageTitle title='Hotels' subtitle='Some description' />
+      <PageTitle title='Hotels' subtitle='Some description' icon='pe-7s-graph2' />
       {hotelStore.isLoading ? (
         <Row className='w-100 justify-content-center my-4'>
           <BarLoader />

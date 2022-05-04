@@ -1,8 +1,13 @@
-import { ApiRoutes } from '../api-routes';
 import { User } from '../db/entities';
-import { attachUser } from '../middlewares/attachUser.middleware';
-import { BaseController } from '../types/utils/controllers';
-import { UserGetReq, UserGetRes, UserPostReq, UserPostRes } from '../types/requests';
+import { attachUser } from '../middlewares';
+import {
+  BaseController,
+  ApiRoutes,
+  UserGetReq,
+  UserGetRes,
+  UserPostReq,
+  UserPostRes
+} from '../types';
 
 export class UserController extends BaseController {
   initRoutes() {

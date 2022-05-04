@@ -1,7 +1,5 @@
-import { ApiRoutes } from '../api-routes';
 import { Hotel } from '../db/entities';
-import { HotelsGetRes } from '../types/requests';
-import { BaseController } from '../types/utils/controllers';
+import { BaseController, ApiRoutes, HotelsGetRes } from '../types';
 
 export class HotelController extends BaseController {
   initRoutes() {
@@ -9,7 +7,10 @@ export class HotelController extends BaseController {
   }
 
   private async getItems(_, res: HotelsGetRes) {
-    const hotels = await Hotel.find({ relations: ['services'] });
+    const hotels = await Hotel.find({
+      order: { stars: 'DESC' },
+      relations: ['services']
+    });
     res.json(hotels);
   }
 }

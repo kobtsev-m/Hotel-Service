@@ -7,7 +7,8 @@ export class HotelStore {
   private rootStore: RootStore;
 
   hotels: Hotel[] = [];
-  isLoading: boolean = false;
+  isLoading = false;
+  isFetched = false;
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
@@ -17,15 +18,12 @@ export class HotelStore {
   async getItems() {
     try {
       this.isLoading = true;
-
-      const hotels = await apiService.getHotels();
-
-      runInAction(() => {
-        this.hotels = hotels;
-        this.isLoading = false;
-      });
+      this.hotels = await apiService.getHotels();
+      this.isFetched = true;
     } catch (e) {
       console.log(e);
+    } finally {
+      this.isLoading = false;
     }
   }
 }

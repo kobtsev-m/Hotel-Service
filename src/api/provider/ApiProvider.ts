@@ -24,14 +24,20 @@ class ApiProvider {
     configureAxios();
   }
 
+  getHeaders() {
+    return this.params.headers;
+  }
+
   updateHeaders(headers: Record<string, string | undefined>) {
+    const newHeaders = { ...this.params.headers };
     Object.entries(headers).forEach(([key, value]) => {
       if (value) {
-        this.params.headers[key] = value;
+        newHeaders[key] = value;
       } else {
-        delete this.params.headers[key];
+        delete newHeaders[key];
       }
     });
+    this.params.headers = newHeaders;
   }
 
   get<T>(url: string): Promise<T> {
@@ -40,13 +46,13 @@ class ApiProvider {
       : this.localAxios.get(url, this.params).then(({ data }) => data);
   }
 
-  post<T, Q = {}>(url: string, body: Q): Promise<T> {
+  post<T>(url: string, body: any): Promise<T> {
     return this.isAWS
       ? API.post(this.awsAppName, url, { ...this.params, body })
       : this.localAxios.post(url, body, this.params).then(({ data }) => data);
   }
 
-  put<T, Q = {}>(url: string, body: Q): Promise<T> {
+  put<T>(url: string, body: any): Promise<T> {
     return this.isAWS
       ? API.put(this.awsAppName, url, { ...this.params, body })
       : this.localAxios.put(url, body, this.params).then(({ data }) => data);

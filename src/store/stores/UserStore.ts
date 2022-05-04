@@ -1,5 +1,6 @@
 import { Auth } from 'aws-amplify';
 import { makeAutoObservable, runInAction } from 'mobx';
+import { UserRole } from '../../../amplify/backend/function/api/src/app/db/constants';
 import { User } from '../../../amplify/backend/function/api/src/app/db/entities';
 import { apiProvider, apiService } from '../../api';
 import { RootStore } from './RootStore';
@@ -20,7 +21,7 @@ export class UserStore {
   private rootStore: RootStore;
 
   user: User | null = null;
-  isLoading: boolean = false;
+  isLoading = false;
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
@@ -72,19 +73,21 @@ export class UserStore {
     if (token) {
       apiProvider.updateHeaders({ Authorization: `Bearer ${token}` });
       request && (request.headers.Authorization = `Bearer ${token}`);
-    } else {
-      apiProvider.updateHeaders({ Authorization: undefined });
-      request && delete request.headers.Authorization;
     }
   }
 
   async signOut() {
     this.isLoading = true;
     await Auth.signOut();
+    apiProvider.updateHeaders({ Authorization: undefined });
 
     runInAction(() => {
       this.user = null;
       this.isLoading = false;
     });
+  }
+
+  isAdmin() {
+    return !!this.user && this.user.role === UserRole.ADMIN;
   }
 }

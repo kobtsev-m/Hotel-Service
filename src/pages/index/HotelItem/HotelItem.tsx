@@ -25,15 +25,6 @@ interface Props {
 export const HotelItem: React.FC<Props> = ({ hotel }) => {
   const [activeTab, setActiveTab] = useState<'1' | '2'>('1');
   const [imageSources, isImagesLoading] = useProgressiveImageMultiple(`hotels/${hotel['id']}`);
-
-  const services = [
-    { name: 'Spa', price: 100 },
-    { name: 'Gym', price: 50 },
-    { name: 'Surfing', price: 45 },
-    { name: 'Aquapark', price: 23 },
-    { name: 'Bar', price: 59 }
-  ];
-
   return (
     <Card className='main-card mb-3'>
       <div className='dropdown-menu-header'>

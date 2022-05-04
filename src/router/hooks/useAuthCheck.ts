@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { UserRole } from '../../../amplify/backend/function/api/src/app/db/constants';
+import apiProvider from '../../api/provider/ApiProvider';
 import { useStores } from '../../store';
 
 export const useAuthCheck = () => {
@@ -7,8 +8,12 @@ export const useAuthCheck = () => {
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [isAuth, setIsAuth] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const headers = apiProvider.getHeaders();
 
   useEffect(() => {
+    if (headers['Authorization']) {
+      return;
+    }
     (async () => {
       try {
         await userStore.authUserByJWT();
@@ -19,7 +24,7 @@ export const useAuthCheck = () => {
         setIsCheckingAuth(false);
       }
     })();
-  }, []);
+  }, [headers]);
 
   return { isCheckingAuth, isAuth, isAdmin };
 };
