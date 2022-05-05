@@ -6,20 +6,16 @@ import configs from './configs';
 import { initRoutes } from './contollers';
 import { connectToDb } from './db';
 
-const initApp = async () => {
-  const app = express();
-  app.use(bodyParser.json());
-  app.use(awsServerlessExpressMiddleware.eventContext());
-  app.use(cors({ allowedHeaders: ['*'] }));
+const app = express();
+app.use(bodyParser.json());
+app.use(awsServerlessExpressMiddleware.eventContext());
+app.use(cors({ allowedHeaders: ['*'] }));
 
-  initRoutes(app);
-  await connectToDb();
+initRoutes(app);
+connectToDb();
 
-  app.listen(configs.server.port, () => {
-    console.log(`Server started on http://localhost:${configs.server.port}`);
-  });
+app.listen(configs.server.port, () => {
+  console.log(`Server started on http://localhost:${configs.server.port}`);
+});
 
-  return app;
-};
-
-export default initApp();
+export default app;
