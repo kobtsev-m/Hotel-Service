@@ -5,7 +5,7 @@
         "skipLibCheck": true,
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
-        "target": "es5",
+        "target": "es6",
         "moduleResolution": "node",
         "sourceMap": true,
         "baseUrl": "."
