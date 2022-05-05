@@ -42,7 +42,7 @@ export const ApartmentCreate: React.FC<Props> = observer(({ toggleAdditionMode }
             onClick={toggleAdditionMode}
           >
             Cancel
-            <i className='pe-7s-close ml-1' />
+            <i className='pe-7s-close pt-1 ml-1' />
           </Button>
         </div>
       </div>

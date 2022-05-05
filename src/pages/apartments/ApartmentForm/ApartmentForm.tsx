@@ -45,7 +45,8 @@ export const ApartmentForm: React.FC<Props> = observer(({ id, initialValues, onS
             />
           </FormGroup>
           <FormGroup>
-            <Label>Price per day</Label>
+            <Label>Price per day ($)</Label>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus dignissimos harum natus nihil obcaecati
             <Input
               tag={Field}
               id='pricePerDay-apartment'

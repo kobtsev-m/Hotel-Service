@@ -54,8 +54,8 @@ export const ApartmentList: React.FC<Props> = observer(({ toggleAdditionMode }) 
           </Row>
           <Row className='justify-content-end mt-2'>
             <Pagination>
-              <PaginationItem disabled={apartmentStore.page === 0} onClick={prevPage}>
-                <PaginationLink previous href='#'>
+              <PaginationItem disabled={apartmentStore.page === 0}>
+                <PaginationLink previous href='#' onClick={prevPage}>
                   {' '}
                 </PaginationLink>
               </PaginationItem>
@@ -68,11 +68,8 @@ export const ApartmentList: React.FC<Props> = observer(({ toggleAdditionMode }) 
                   <PaginationLink href='#'>{i + 1}</PaginationLink>
                 </PaginationItem>
               ))}
-              <PaginationItem
-                disabled={apartmentStore.page === apartmentStore.totalPages - 1}
-                onClick={nextPage}
-              >
-                <PaginationLink next href='#'>
+              <PaginationItem disabled={apartmentStore.page === apartmentStore.totalPages - 1}>
+                <PaginationLink next href='#' onClick={nextPage}>
                   {' '}
                 </PaginationLink>
               </PaginationItem>
