@@ -4,5 +4,6 @@ export enum AppRoutes {
   SignUp = '/sign-up',
   Services = '/services',
   Apartments = '/apartments',
-  About = '/about'
+  About = '/about',
+  Statistic = '/statistic'
 }

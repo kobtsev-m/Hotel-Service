@@ -1,7 +1,7 @@
 import { Auth } from 'aws-amplify';
 import { makeAutoObservable, runInAction } from 'mobx';
 import { UserRole } from '../../../amplify/backend/function/api/src/app/db/constants';
-import { User } from '../../../amplify/backend/function/api/src/app/db/entities';
+import { IUser } from '../../../amplify/backend/function/api/src/app/types';
 import { apiProvider, apiService } from '../../api';
 import { RootStore } from './RootStore';
 
@@ -20,7 +20,7 @@ export interface SignInParams {
 export class UserStore {
   private rootStore: RootStore;
 
-  user: User | null = null;
+  user: IUser | null = null;
   isLoading = false;
 
   constructor(rootStore: RootStore) {

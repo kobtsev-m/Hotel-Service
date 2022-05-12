@@ -1,8 +1,10 @@
 import cn from 'classnames';
+import { observer } from 'mobx-react-lite';
 import React, { Fragment } from 'react';
 import MetisMenu from 'react-metismenu';
 import { NavLink } from 'react-router-dom';
 import { AppRoutes } from '../../../../routes';
+import { useStores } from '../../../../store';
 
 const MenuNav = [
   {
@@ -30,11 +32,21 @@ const AboutNav = [
   }
 ];
 
+const AdminNav = [
+  {
+    icon: 'pe-7s-display1',
+    label: 'Statistic',
+    to: AppRoutes.Statistic
+  }
+];
+
 const CustomNavLink = ({ label, to, children, className }) => {
   return <NavLink title={label} to={to} children={children} className={cn(className, 'mt-1')} />;
 };
 
-export const Nav: React.FC = () => {
+export const Nav: React.FC = observer(() => {
+  const { userStore } = useStores();
+  const isAdmin = userStore.isAdmin();
   return (
     <Fragment>
       <h5 className='app-sidebar__heading'>Menu</h5>
@@ -57,6 +69,20 @@ export const Nav: React.FC = () => {
         classNameStateIcon='pe-7s-angle-down'
         LinkComponent={CustomNavLink}
       />
+      {isAdmin && (
+        <Fragment>
+          <h5 className='app-sidebar__heading'>Admin</h5>
+          <MetisMenu
+            content={AdminNav}
+            onSelected={() => {}}
+            activeLinkFromLocation
+            className='vertical-nav-menu mb-1'
+            iconNamePrefix=''
+            classNameStateIcon='pe-7s-angle-down'
+            LinkComponent={CustomNavLink}
+          />
+        </Fragment>
+      )}
     </Fragment>
   );
-};
+});

@@ -1,8 +1,17 @@
 import { observer } from 'mobx-react-lite';
 import React, { Fragment, useEffect } from 'react';
 import { BarLoader } from 'react-spinners';
-import { Button, Col, Pagination, PaginationItem, PaginationLink, Row } from 'reactstrap';
+import {
+  Button,
+  Col,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+  Row,
+  UncontrolledCollapse
+} from 'reactstrap';
 import { useStores } from '../../../store';
+import { ApartmentFilters } from '../ApartmentFilters/ApartmentFilters';
 import { ApartmentItem } from '../ApartmentItem/ApartmentItem';
 
 interface Props {
@@ -39,6 +48,18 @@ export const ApartmentList: React.FC<Props> = observer(({ toggleAdditionMode }) 
         )}
       </div>
       <hr />
+      <Button
+        color='light'
+        className='btn-shadow w-100'
+        id='apartmentsFilters'
+        disabled={!apartmentStore.apartments.length}
+      >
+        Search filters
+      </Button>
+      <UncontrolledCollapse toggler='#apartmentsFilters'>
+        <ApartmentFilters />
+      </UncontrolledCollapse>
+      <hr />
       {apartmentStore.isLoading ? (
         <div className='w-100 d-flex justify-content-center my-5'>
           <BarLoader />
@@ -47,12 +68,12 @@ export const ApartmentList: React.FC<Props> = observer(({ toggleAdditionMode }) 
         <Fragment>
           <Row>
             {apartmentStore.apartments.map((apartment) => (
-              <Col key={apartment['id']} md={6} className='mb-2'>
+              <Col key={apartment['id']} md={6}>
                 <ApartmentItem apartment={apartment} isUserAdmin={isUserAdmin} />
               </Col>
             ))}
           </Row>
-          <Row className='justify-content-end mt-2'>
+          <Row className='justify-content-end m-0'>
             <Pagination>
               <PaginationItem disabled={apartmentStore.page === 0}>
                 <PaginationLink previous href='#' onClick={prevPage}>

@@ -1,25 +1,23 @@
 import { makeAutoObservable } from 'mobx';
-import { IHotel } from '../../../amplify/backend/function/api/src/app/types';
 import { apiService } from '../../api';
 import { RootStore } from './RootStore';
 
-export class HotelStore {
+export class StatisticStore {
   private rootStore: RootStore;
 
-  hotels: IHotel[] = [];
+  statistic = null;
   isLoading = false;
-  isFetched = false;
+  isFetch = false;
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
     this.rootStore = rootStore;
   }
 
-  async getItems() {
+  async getItem() {
     try {
       this.isLoading = true;
-      this.hotels = await apiService.getHotels();
-      this.isFetched = true;
+      await apiService.getStatistic();
     } catch (e) {
       console.log(e);
     } finally {

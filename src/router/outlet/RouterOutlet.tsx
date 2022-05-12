@@ -2,9 +2,9 @@ import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { ScaleLoader } from 'react-spinners';
-import { Layout } from '../../../components/Layout/Layout';
-import { AppRoutes } from '../../../routes';
-import { useAuthCheck } from '../../hooks/useAuthCheck';
+import { Layout } from '../../components/Layout/Layout';
+import { AppRoutes } from '../../routes';
+import { useAuthCheck } from '../hooks/useAuthCheck';
 
 export enum OutletType {
   Guest = 'guest',
@@ -16,9 +16,9 @@ interface Props {
   type: OutletType;
 }
 
-const signInPaths: string[] = [AppRoutes.SignIn, AppRoutes.SignUp];
+const authorizationRoutes: string[] = [AppRoutes.SignIn, AppRoutes.SignUp];
 
-export const CustomOutlet: React.FC<Props> = observer(({ type }) => {
+export const RouterOutlet: React.FC<Props> = observer(({ type }) => {
   const { pathname: path } = useLocation();
   const { isCheckingAuth, isAuth, isAdmin } = useAuthCheck();
 
@@ -33,7 +33,7 @@ export const CustomOutlet: React.FC<Props> = observer(({ type }) => {
   if (
     (type === OutletType.Admin && isAdmin) ||
     (type === OutletType.Auth && isAuth) ||
-    (type === OutletType.Guest && !signInPaths.includes(path))
+    (type === OutletType.Guest && !authorizationRoutes.includes(path))
   ) {
     return (
       <Layout>
@@ -44,7 +44,7 @@ export const CustomOutlet: React.FC<Props> = observer(({ type }) => {
     return <Navigate to={AppRoutes.Index} />;
   } else if (type === OutletType.Auth && !isAuth) {
     return <Navigate to={AppRoutes.SignUp} />;
-  } else if (type === OutletType.Guest && signInPaths.includes(path) && isAuth) {
+  } else if (type === OutletType.Guest && authorizationRoutes.includes(path) && isAuth) {
     return <Navigate to={AppRoutes.Index} />;
   } else {
     return <Outlet />;

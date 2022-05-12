@@ -14,12 +14,12 @@ import {
   TabPane
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Hotel, Service } from '../../../../amplify/backend/function/api/src/app/db/entities';
+import { IHotel, IService } from '../../../../amplify/backend/function/api/src/app/types';
 import { useProgressiveImageMultiple } from '../../../hooks';
 import cn from 'classnames';
 
 interface Props {
-  hotel: Hotel;
+  hotel: IHotel;
 }
 
 export const HotelItem: React.FC<Props> = ({ hotel }) => {
@@ -110,7 +110,7 @@ export const HotelItem: React.FC<Props> = ({ hotel }) => {
 };
 
 interface ServiceProps {
-  service: Service;
+  service: IService;
 }
 
 const ServiceItem: React.FC<ServiceProps> = ({ service }) => {

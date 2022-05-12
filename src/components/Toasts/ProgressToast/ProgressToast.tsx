@@ -4,11 +4,11 @@ import { Spinner } from 'reactstrap';
 
 const ProgressToast: React.FC<{ text: string }> = ({ text }) => {
   return (
-    <div className='position-relative d-flex justify-content-center align-items-center'>
-      <Spinner className='position-absolute' size='sm' style={{ left: '0.5rem' }}>
+    <div className='d-flex align-items-center'>
+      <Spinner size='sm' className='ml-2 mr-3'>
         {' '}
       </Spinner>
-      <span className='ml-2'>{text}...</span>
+      <span className='display-6'>{text}...</span>
     </div>
   );
 };

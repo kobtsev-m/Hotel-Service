@@ -1,5 +1,7 @@
+import qs from 'qs';
 import {
   ApartmentDelRes,
+  ApartmentGetReq,
   ApartmentGetRes,
   ApartmentPostReq,
   ApartmentPostRes,
@@ -7,40 +9,44 @@ import {
   ApartmentPutRes,
   ApiRoutes,
   HotelsGetRes,
+  StatisticGetRes,
   UserGetRes,
   UserPostReq,
   UserPostRes
 } from '../../../amplify/backend/function/api/src/app/types';
-import { FromApi } from '../utils/inferApiTypes';
 import apiProvider from '../provider/ApiProvider';
-import qs from 'qs';
+import { ReqBody, ReqQuery, ResJson } from '../utils/inferApiTypes';
 
 class ApiService {
   getUser() {
-    return apiProvider.get<FromApi<UserGetRes>>(ApiRoutes.User);
+    return apiProvider.get<ResJson<UserGetRes>>(ApiRoutes.User);
   }
-  createUser(data: FromApi<UserPostReq>) {
-    return apiProvider.post<FromApi<UserPostRes>>(ApiRoutes.User, data);
+  createUser(data: ReqBody<UserPostReq>) {
+    return apiProvider.post<ResJson<UserPostRes>>(ApiRoutes.User, data);
   }
 
   getHotels() {
-    return apiProvider.get<FromApi<HotelsGetRes>>(ApiRoutes.Hotels);
+    return apiProvider.get<ResJson<HotelsGetRes>>(ApiRoutes.Hotels);
   }
 
-  getApartments(offset: number, limit: number) {
-    const query = qs.stringify({ offset, limit }, { addQueryPrefix: true });
-    return apiProvider.get<FromApi<ApartmentGetRes>>(ApiRoutes.Apartments + query);
+  getApartments(params: ReqQuery<ApartmentGetReq>) {
+    const query = qs.stringify(params, { addQueryPrefix: true });
+    return apiProvider.get<ResJson<ApartmentGetRes>>(ApiRoutes.Apartments + query);
   }
-  createApartment(data: FromApi<ApartmentPostReq>) {
-    return apiProvider.post<FromApi<ApartmentPostRes>>(ApiRoutes.Apartments, data);
+  createApartment(data: ReqBody<ApartmentPostReq>) {
+    return apiProvider.post<ResJson<ApartmentPostRes>>(ApiRoutes.Apartments, data);
   }
-  updateApartment(id: string, data: FromApi<ApartmentPutReq>) {
+  updateApartment(id: string, data: ReqBody<ApartmentPutReq>) {
     const url = ApiRoutes.ApartmentItem.replace(':id', id);
-    return apiProvider.put<FromApi<ApartmentPutRes>>(url, data);
+    return apiProvider.put<ResJson<ApartmentPutRes>>(url, data);
   }
   deleteApartment(id: string) {
     const url = ApiRoutes.ApartmentItem.replace(':id', id);
-    return apiProvider.delete<FromApi<ApartmentDelRes>>(url);
+    return apiProvider.delete<ResJson<ApartmentDelRes>>(url);
+  }
+
+  getStatistic() {
+    return apiProvider.get<ResJson<StatisticGetRes>>(ApiRoutes.Statistic);
   }
 }
 

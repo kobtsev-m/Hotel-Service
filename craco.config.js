@@ -2,10 +2,11 @@ const path = require('path');
 
 const sharedBackend = path.resolve(__dirname, 'amplify/backend/function/api/src/app');
 
-const findWebpackPlugin = (webpackConfig, pluginName) =>
-  webpackConfig.resolve.plugins.find(
+const findWebpackPlugin = (webpackConfig, pluginName) => {
+  return webpackConfig.resolve.plugins.find(
     ({ constructor }) => constructor && constructor.name === pluginName
   );
+};
 
 const enableTypescriptImportsFromExternalPaths = (webpackConfig, newIncludePaths) => {
   const oneOfRule = webpackConfig.module.rules.find((rule) => rule.oneOf);

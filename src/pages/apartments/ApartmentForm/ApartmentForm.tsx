@@ -3,31 +3,38 @@ import { observer } from 'mobx-react-lite';
 import React, { useEffect, useRef } from 'react';
 import { DropdownList } from 'react-widgets';
 import { FormGroup, Input, Label } from 'reactstrap';
-import { ApartmentRequired } from '../../../../amplify/backend/function/api/src/app/types';
+import { IApartmentRequired } from '../../../../amplify/backend/function/api/src/app/types';
 import { useStores } from '../../../store';
 
 interface Props {
   id: string;
-  initialValues: ApartmentRequired;
-  onSubmit: (values: ApartmentRequired) => void;
+  initialValues: IApartmentRequired;
+  onSubmit: (values: IApartmentRequired) => void;
 }
 
 export const ApartmentForm: React.FC<Props> = observer(({ id, initialValues, onSubmit }) => {
   const { hotelStore } = useStores();
-  const formRef = useRef<FormikProps<ApartmentRequired>>(null);
+  const formRef = useRef<FormikProps<IApartmentRequired>>(null);
 
   useEffect(() => {
-    if (hotelStore.isFetched) {
-      return;
-    }
     (async () => {
-      await hotelStore.getItems();
-      formRef.current?.resetForm();
+      if (!hotelStore.isFetched) {
+        await hotelStore.getItems();
+      }
+      if (formRef.current) {
+        formRef.current.initialValues.hotelId =
+          formRef.current.initialValues.hotelId || hotelStore.hotels[0]?.id;
+        formRef.current.resetForm();
+      }
     })();
   }, []);
 
   return (
-    <Formik<ApartmentRequired> innerRef={formRef} initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik<IApartmentRequired>
+      innerRef={formRef}
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+    >
       {({ values, setFieldValue }) => (
         <Form id={`apartment-edit-form-${id}`} autoComplete='off'>
           <FormGroup>
@@ -37,16 +44,16 @@ export const ApartmentForm: React.FC<Props> = observer(({ id, initialValues, onS
           <FormGroup>
             <Label>Description</Label>
             <Input
-              tag={Field}
+              tag={(args) => Field({ ...args, as: 'textarea' })}
               id='description-apartment'
               name='description'
               type='textarea'
               required={true}
+              rows={3}
             />
           </FormGroup>
           <FormGroup>
             <Label>Price per day ($)</Label>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus dignissimos harum natus nihil obcaecati
             <Input
               tag={Field}
               id='pricePerDay-apartment'
@@ -83,12 +90,12 @@ export const ApartmentForm: React.FC<Props> = observer(({ id, initialValues, onS
             <Label>Hotel</Label>
             <DropdownList
               dropUp
-              busy={hotelStore.isLoading}
+              busy={!values.hotelId}
               data={hotelStore.hotels}
               dataKey='id'
               textField='name'
-              value={values.hotelId || hotelStore.hotels[0]?.id}
-              onChange={(hotel) => setFieldValue('hotelId', hotel['id'])}
+              value={values.hotelId}
+              onChange={(hotel) => setFieldValue('hotelId', hotel.id)}
             />
           </FormGroup>
         </Form>
