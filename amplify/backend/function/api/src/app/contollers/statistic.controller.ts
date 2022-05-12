@@ -10,36 +10,37 @@ export class StatisticController extends BaseController {
 
   private async getItem(_, res: StatisticGetRes) {
     await db.connect();
+
+    // Group By
     const hotelsApartmentsCount = await Apartment.createQueryBuilder('apartment')
       .select('apartment.hotelId')
       .addSelect('SUM(apartment.availableCount)')
       .groupBy('apartment.hotelId')
       .getRawMany();
+
+    // Having
     const hotelsWithAtLeastTenApartments = await Apartment.createQueryBuilder('apartment')
       .select('apartment.hotelId')
       .addSelect('SUM(apartment.availableCount)')
       .groupBy('apartment.hotelId')
       .having('SUM(apartment.availableCount) >= 10')
       .getRawMany();
+
+    // With SubQuery
     const servicesForHotels = await Hotel.createQueryBuilder('hotel')
       .innerJoinAndSelect('hotel.services', 'service')
       .loadRelationCountAndMap('hotel.servicesCount', 'hotel.services')
       .getManyAndCount();
-    // const apartmentsWithSpa = await Apartment.createQueryBuilder('apartment')
-    //   .select('apartment.id')
-    //   .addSelect('apartment.name')
-    //   .innerJoin(Hotel, 'hotel', 'hotel.id = apartment.hotelId')
-    //   .where('hotel.services');
 
     const serviceCountForHotels = servicesForHotels[0].map((hotel: any) => ({
       id: hotel.id,
       servicesCount: hotel!.servicesCount
     }));
 
-    console.log(hotelsApartmentsCount);
-    console.log(hotelsWithAtLeastTenApartments);
-    console.log(serviceCountForHotels);
-
-    res.json({});
+    res.json({
+      hotelsApartmentsCount,
+      hotelsWithAtLeastTenApartments,
+      serviceCountForHotels
+    });
   }
 }

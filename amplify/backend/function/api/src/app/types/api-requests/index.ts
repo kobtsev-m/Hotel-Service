@@ -86,5 +86,10 @@ export type IRent = Omit<Rent, keyof BaseEntity | 'user' | 'apartment'> & {
 // #endregion
 
 // #region Statistic
-export type StatisticGetRes = IResponse<{}>;
+export interface IStatistic {
+  hotelsApartmentsCount: { hotelId: string; sum: string }[];
+  hotelsWithAtLeastTenApartments: { hotelId: string; sum: string }[];
+  serviceCountForHotels: { id: string; servicesCount: number }[];
+}
+export type StatisticGetRes = IResponse<IStatistic>;
 // #endregion

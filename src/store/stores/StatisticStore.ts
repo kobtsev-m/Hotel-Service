@@ -1,13 +1,14 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
+import { IStatistic } from '../../../amplify/backend/function/api/src/app/types';
 import { apiService } from '../../api';
 import { RootStore } from './RootStore';
 
 export class StatisticStore {
   private rootStore: RootStore;
 
-  statistic = null;
+  statistic: IStatistic | null = null;
   isLoading = false;
-  isFetch = false;
+  isFetched = false;
 
   constructor(rootStore: RootStore) {
     makeAutoObservable(this);
@@ -17,7 +18,12 @@ export class StatisticStore {
   async getItem() {
     try {
       this.isLoading = true;
-      await apiService.getStatistic();
+      const statistic = await apiService.getStatistic();
+
+      runInAction(() => {
+        this.statistic = statistic;
+        this.isFetched = true;
+      });
     } catch (e) {
       console.log(e);
     } finally {
