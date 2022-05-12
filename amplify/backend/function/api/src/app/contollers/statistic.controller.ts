@@ -28,7 +28,7 @@ export class StatisticController extends BaseController {
 
     // With SubQuery
     const servicesForHotels = await Hotel.createQueryBuilder('hotel')
-      .innerJoinAndSelect('hotel.services', 'service')
+      .leftJoinAndSelect('hotel.services', 'service')
       .loadRelationCountAndMap('hotel.servicesCount', 'hotel.services')
       .getManyAndCount();
 
