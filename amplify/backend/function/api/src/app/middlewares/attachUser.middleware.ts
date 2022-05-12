@@ -1,10 +1,12 @@
 import createError from 'http-errors';
 import { TokenExpiredError } from 'jsonwebtoken';
+import db from '../db';
 import { User } from '../db/entities';
 import authService from '../services/auth.service';
 
 export const attachUser = async (req, res, next) => {
   try {
+    await db.connect();
     const authorizationHeader = req.header('Authorization');
     if (!authorizationHeader) {
       throw createError(403, 'Auth error');

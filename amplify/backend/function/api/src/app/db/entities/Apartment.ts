@@ -1,5 +1,6 @@
 import {
   BaseEntity,
+  Check,
   Column,
   Entity,
   JoinColumn,
@@ -11,6 +12,7 @@ import { Hotel } from './Hotel';
 import { Rent } from './Rent';
 
 @Entity('apartments')
+@Check('"pricePerDay" > 0')
 export class Apartment extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -33,7 +35,7 @@ export class Apartment extends BaseEntity {
   @Column({ type: 'int' })
   availableCount: number;
 
-  @ManyToOne(() => Hotel, (hotel) => hotel.apartments)
+  @ManyToOne(() => Hotel, (hotel) => hotel.apartments, { nullable: false })
   @JoinColumn({ name: 'hotelId' })
   hotel: Hotel;
 

@@ -1,5 +1,4 @@
-import { Express } from 'express';
-import { Request, Response } from 'express';
+import { Express, Request, Response } from 'express';
 
 export type IRequest<T, P = {}, Q = {}> = Request<P, {}, T, Q>;
 export type IResponse<T> = Response<T>;

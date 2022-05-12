@@ -1,12 +1,20 @@
-import { createConnection } from 'typeorm';
+import { Connection, createConnection } from 'typeorm';
 
-export const connectToDb = async () => {
-  try {
-    const connection = await createConnection();
-    console.log('Connected to db!');
-    return connection;
-  } catch (e) {
-    console.log('Unable to connect to db:', e.message);
-    return null;
+class Database {
+  private connection: Connection | null;
+
+  constructor() {}
+
+  async connect() {
+    if (this.connection) {
+      return;
+    }
+    try {
+      this.connection = await createConnection();
+    } catch (e) {
+      console.log('Unable to connect to db:', e.message);
+    }
   }
-};
+}
+
+export default new Database();

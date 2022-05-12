@@ -1,8 +1,9 @@
+import db from '../db';
 import { User } from '../db/entities';
 import { attachUser } from '../middlewares';
 import {
-  BaseController,
   ApiRoutes,
+  BaseController,
   UserGetReq,
   UserGetRes,
   UserPostReq,
@@ -16,10 +17,12 @@ export class UserController extends BaseController {
   }
 
   private async getItem(req: UserGetReq, res: UserGetRes) {
+    await db.connect();
     res.json(req.body.user);
   }
 
   private async crateItem(req: UserPostReq, res: UserPostRes) {
+    await db.connect();
     const user = User.create(req.body);
     await user.save();
     res.json(user);

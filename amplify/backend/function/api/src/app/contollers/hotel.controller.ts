@@ -1,5 +1,6 @@
+import db from '../db';
 import { Hotel } from '../db/entities';
-import { BaseController, ApiRoutes, HotelsGetRes } from '../types';
+import { ApiRoutes, BaseController, HotelsGetRes } from '../types';
 
 export class HotelController extends BaseController {
   initRoutes() {
@@ -7,6 +8,7 @@ export class HotelController extends BaseController {
   }
 
   private async getItems(_, res: HotelsGetRes) {
+    await db.connect();
     const hotels = await Hotel.find({
       order: { stars: 'DESC' },
       relations: ['services']

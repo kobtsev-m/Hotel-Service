@@ -4,7 +4,6 @@ import cors from 'cors';
 import express from 'express';
 import configs from './configs';
 import { initRoutes } from './contollers';
-import { connectToDb } from './db';
 
 const app = express();
 app.use(bodyParser.json());
@@ -12,7 +11,6 @@ app.use(awsServerlessExpressMiddleware.eventContext());
 app.use(cors({ allowedHeaders: ['*'] }));
 
 initRoutes(app);
-connectToDb();
 
 app.listen(configs.server.port, () => {
   console.log(`Server started on http://localhost:${configs.server.port}`);
